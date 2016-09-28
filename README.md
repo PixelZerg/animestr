@@ -1,2 +1,3 @@
 # animestr
-stream anime on your android! http://pixelzerg.github.io/projects/animestr/
+#### A program for scraping Anime mrls from various sources
+#### NB: The Android version is deprecated
