@@ -1,0 +1,25 @@
+﻿<Properties StartupItem="animestr/animestr.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="animestr/Utils.cs">
+    <Files>
+      <File FileName="animestr/Program.cs" Line="22" Column="137" />
+      <File FileName="animestr/AnimeData.cs" Line="38" Column="4" />
+      <File FileName="animestr/Utils.cs" Line="16" Column="24" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="animestr" expanded="True">
+            <Node name="animestr" expanded="True">
+              <Node name="Utils.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
