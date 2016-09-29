@@ -15,11 +15,11 @@ namespace animestr
 
 		public static void ClearConsole()
 		{
-			for (int i = 0; i < Console.WindowHeight*15; i++) 
+			for (int i = 0; i < Console.WindowHeight*2; i++) 
 			{
 				Console.WriteLine ();
 			}
-			Console.WriteLine(((char)27)+"c");// = \ec = clear
+			Console.WriteLine(((char)27)+"c");// = \ec = clear (on some terminals)
 		}
 	}
 }

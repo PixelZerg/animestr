@@ -8,8 +8,6 @@ namespace animestr
 		public List<string> items = new List<string>();
 		public string title = "list";
 
-		private int lastEnd = 0;
-
 		public ConsoleList ()
 		{
 		}
@@ -38,7 +36,7 @@ namespace animestr
 					Console.ForegroundColor = ConsoleColor.Yellow;
 				}
 				if (i < items.Count) {
-					Console.WriteLine ((i < 9 ? " " : "") + (i + 1) + ") " + (items[i].Length>=Console.WindowWidth-8-i.ToString().Length ? items[i].Substring(0,Console.WindowWidth-8-i.ToString().Length)+"...": items[i]));
+					Console.WriteLine ((i < 9 ? " " : "") + (i + 1) + "| " + (items[i].Length>=Console.WindowWidth-8-i.ToString().Length ? items[i].Substring(0,Console.WindowWidth-8-i.ToString().Length)+"...": items[i]));
 				} else {
 					Console.WriteLine ();//padding
 				}
@@ -59,7 +57,7 @@ namespace animestr
 		/// </summary>
 		public void PrintList(string text, int pageNo)
 		{
-			Console.WriteLine(this.title + " - page " + pageNo);
+			Console.WriteLine(this.title + " - page " + pageNo+"/"+items.Count/(Console.WindowHeight - 3));
 			PrintList (1, 2, pageNo);//bottom 2 because line br:
 			Console.WriteLine (text);
 			Utils.PrintBreak ('-');
