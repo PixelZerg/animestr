@@ -17,7 +17,14 @@ namespace animestr
 
         public string GetTitle()
         {
-            return GetSection("<h1", @"</h1", "span"); ;
+            return GetBetween(GetSection(this.page, "<h1", @"</h1", "span"), "\"name\">", "</span");
+        }
+
+        public List<string> GetAlts()
+        {
+            string section = GetSection(this.page, "itles</h2>", "<h2>");
+            Console.WriteLine(section);
+            return null;
         }
 
         /// <summary>
@@ -25,7 +32,7 @@ namespace animestr
         /// </summary>
         public string GetLinkSection()
         {
-            return GetSection("<a", @"</a", "strong");
+            return GetSection(this.page, "<a", @"</a", "strong");
         }
 
         /// <summary>
@@ -38,7 +45,29 @@ namespace animestr
         public static string GetBetween(string text, string m1, string m2)
         {
             int oIndex = text.IndexOf(m1) + m1.Length;
-            return text.Substring(oIndex, text.IndexOf(m2, oIndex) - oIndex)
+            return text.Substring(oIndex, text.IndexOf(m2, oIndex) - oIndex);
+        }
+
+        /// <summary>
+        /// Gets substring of the text - marked by two strings
+        /// </summary>
+        /// <param name="text">text</param>
+        /// <param name="m1">opening marker</param>
+        /// <param name="m2">closing marker</param>
+        /// <returns></returns>
+        public static List<string> GetBetweens(string text, string m1, string m2)
+        {
+            List<string> ret = new List<string>();
+            bool getting = true;
+            int offset = 0;
+            while (getting)
+            {
+                int oIndex = text.IndexOf(m1,offset) + m1.Length;
+                string s = text.Substring(oIndex, text.IndexOf(m2, oIndex) - oIndex);
+
+                offset = oIndex + s.Length + m2.Length;
+            }
+            return ret;
         }
 
         /// <summary>
@@ -48,7 +77,7 @@ namespace animestr
         /// <param name="tag2">Closing marker. E.g: "&lt;/a"</param>
         /// <param name="contain">text which must be within the two markers. Method will keep searching until a section with this text is found</param>
         /// <returns></returns>
-        public string GetSection(string tag1, string tag2, params string[] contains)
+        public static string GetSection(string text, string tag1, string tag2, params string[] contains)
         {
             bool found = false;
             int offset = 0;
@@ -56,14 +85,14 @@ namespace animestr
             int no = 0;
             while (!found)
             {
-                int aIndex = page.IndexOf(tag1, offset);
+                int aIndex = text.IndexOf(tag1, offset);
                 if (aIndex < 0)
                 {
                     return null;
                 }
                 try
                 {
-                    section = page.Substring(aIndex, page.IndexOf(tag2, aIndex) - aIndex);
+                    section = text.Substring(aIndex, text.IndexOf(tag2, aIndex) - aIndex);
 
                     bool containsAll = true;
 
@@ -89,7 +118,7 @@ namespace animestr
                     return null;
                 }
 
-                if (no > page.Length)
+                if (no > text.Length)
                 {
                     return null; //could not find section in the page
                 }
