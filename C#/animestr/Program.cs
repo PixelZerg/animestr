@@ -8,8 +8,7 @@ namespace animestr
 		public static void Main (string[] args)
 		{
 			//Console.WriteLine (Console.WindowWidth+"x"+Console.WindowHeight);
-			string[] words = new string[]
-			{
+			ConsoleList list = new ConsoleList("Mooo list",
 				"moo", 
 				"loo", 
 				"boo",
@@ -72,24 +71,15 @@ namespace animestr
 				"a34",
 				"a35",
 				"a36",
-				"a37",
-			};
-			Utils.PrintList ("Test list:", "wow isn't it cool", 1, words);
-			Console.ReadLine ();
-			Utils.ClearConsole ();
-			Utils.PrintList ("Test list mk2:", "wow, it just got even cooler!", 2, words);
-			Console.ReadLine ();
-			Utils.PrintList ("Test lis3t:", "wow isn't it cool", 3, words);
-			Console.ReadLine ();
-			Utils.ClearConsole ();
-			Utils.PrintList ("Test list mk4:", "wow, it just got even cooler!", 4, words);
-			Console.ReadLine ();
-			Utils.ClearConsole ();
-			Utils.PrintList ("Test list5:", "wow isn't it cool", 5, words);
-			Console.ReadLine ();
-			Utils.ClearConsole ();
-			Utils.PrintList ("Test list mk5:", "wow, it just got even cooler!", 6, words);
-			Console.ReadLine ();
+				"a37"
+			);
+
+			list.PrintList("Wowie wow wow",1);
+			Console.ReadKey();
+			Utils.ClearConsole();
+			list.PrintList("Wowie wodsfhusdhfw wow", 2);
+			Console.Write("MOOO: ");
+			Console.ReadLine();
 		}
     }
 }
