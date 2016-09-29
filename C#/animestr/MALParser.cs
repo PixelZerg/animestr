@@ -22,9 +22,13 @@ namespace animestr
 
         public List<string> GetAlts()
         {
+            List<string> ret = new List<string>();
             string section = GetSection(this.page, "itles</h2>", "<h2>");
-            Console.WriteLine(section);
-            return null;
+            foreach (string s in GetBetweens(section, "</span>", "</div>"))
+            {
+                ret.Add(s.Trim());
+            }
+            return ret;
         }
 
         /// <summary>
@@ -64,8 +68,10 @@ namespace animestr
             {
                 int oIndex = text.IndexOf(m1,offset) + m1.Length;
                 string s = text.Substring(oIndex, text.IndexOf(m2, oIndex) - oIndex);
+                ret.Add(s);
 
                 offset = oIndex + s.Length + m2.Length;
+                getting = text.IndexOf(m1, offset) > 0;
             }
             return ret;
         }

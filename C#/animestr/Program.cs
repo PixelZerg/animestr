@@ -17,7 +17,7 @@ namespace animestr
 		public static void Main (string[] args)
 		{
             MALParser mal = new MALParser(AnimeInfo.GetMALPage("seitokai yakneidomo"));
-            Console.WriteLine(mal.GetAlts());
+            Console.WriteLine(string.Join(", ",mal.GetAlts()));
         }
     }
 }
