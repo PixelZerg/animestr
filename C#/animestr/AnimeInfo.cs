@@ -24,11 +24,10 @@ namespace animestr
         public AnimeInfo() { }
         public AnimeInfo(string title)
         {
-            this.title = title;
-            this.LoadFromMAL();
+            this.LoadFromMAL(title);
         }
 
-        public void LoadFromMAL()
+        public void LoadFromMAL(string title)
         {
             if (this.title != null)
             {

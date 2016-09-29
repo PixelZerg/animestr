@@ -31,6 +31,11 @@ namespace animestr
             return ret;
         }
 
+        public string GetDescription()
+        {
+            return string.Join(Environment.NewLine, GetBetweens(GetBetween(this.page, "itemprop=\"description\"", "</span"), "\"", "\""));
+        }
+
         /// <summary>
         /// For search result pages
         /// </summary>
