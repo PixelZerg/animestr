@@ -36,24 +36,43 @@ namespace animestr
             }
         }
 
-        public static string GetMALPage(string title)
+        public static string GetMALUrl(string query)
         {
             using (WebClient wc = new WebClient())
             {
-                string searchPage = wc.DownloadString(@"https://myanimelist.net/anime.php?q=" + title);
+                string searchPage = wc.DownloadString(@"https://myanimelist.net/anime.php?q=" + query);
 
-                string[] split = searchPage.Split(new string[] { "<a" }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (string s in split)
+                bool linkSectionFound = false;
+                int offset = 0;
+                string l = null;
+                while (!linkSectionFound)
                 {
-                    if (s.Contains("<strong>"))
+                    int aIndex = searchPage.IndexOf("<a", offset);
+                    if (aIndex < 0)
                     {
-                        Console.WriteLine(s);
-                        Utils.PrintBreak('-');
+                        return null;
+                    }
+                    try
+                    {
+                        l = searchPage.Substring(aIndex, searchPage.IndexOf(@"</a", aIndex) - aIndex);
+
+                        if (l.Contains("strong"))
+                        {
+                            linkSectionFound = true;
+                        }
+                        else
+                        {
+                            offset = aIndex + 2; //2 = "<a" length
+                        }
+                    }
+                    catch
+                    {
+                        return null;
                     }
                 }
+                int hIndex = l.IndexOf("href=\"") + 6;
+                return l.Substring(hIndex, l.IndexOf("\"", hIndex) - hIndex);
             }
-
-            return null;
         }
     }
 }
