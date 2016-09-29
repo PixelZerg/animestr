@@ -68,7 +68,7 @@ namespace animestr
 		/// </summary>
 		public void PrintList(string text, int pageNo, int relOffTop, int relOffBottom)
 		{
-			Console.WriteLine(this.title + " - page " + pageNo);
+			Console.WriteLine(this.title + " - page " + pageNo+"/"+items.Count/(Console.WindowHeight - 3));
 			PrintList (1+relOffTop, 2+relOffBottom, pageNo);//bottom 2 because line br:
 			Console.WriteLine (text);
 			Utils.PrintBreak ('-');
