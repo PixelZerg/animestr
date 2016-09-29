@@ -40,7 +40,7 @@ namespace animestr
         {
             using (WebClient wc = new WebClient())
             {
-                string searchPage = wc.DownloadString(@"https://myanimelist.net/anime.php?q=" + query);
+                string searchPage = wc.DownloadString(@"http://myanimelist.net/anime.php?q=" + query);
 
                 bool linkSectionFound = false;
                 int offset = 0;
