@@ -16,6 +16,7 @@ namespace animestr
 	{
 		public static void Main (string[] args)
 		{
+            AnimeInfo.GetMALPage("seitokai");
 		}
     }
 }
