@@ -34,21 +34,18 @@ namespace animestr
             {
                 using (WebClient wc = new WebClient())
                 {
-                    string page = wc.DownloadString(GetMALUrl(this.title));
+                    string page = wc.DownloadString(GetMALPage(this.title));
                 }
             }
         }
 
-        public static string GetMALUrl(string query)
+        public static string GetMALPage(string query)
         {
             using (WebClient wc = new WebClient())
             {
                 string searchPage = wc.DownloadString(@"http://myanimelist.net/anime.php?q=" + Uri.EscapeDataString(query));
 
-                string linkSection = new MALParser(searchPage).GetLinkSection();
-
-                int hIndex = linkSection.IndexOf("href=\"") + 6;
-                return linkSection.Substring(hIndex, linkSection.IndexOf("\"", hIndex) - hIndex);
+                return wc.DownloadString(MALParser.GetBetween(new MALParser(searchPage).GetLinkSection(), "href=\"","\""));
             }
         }
     }

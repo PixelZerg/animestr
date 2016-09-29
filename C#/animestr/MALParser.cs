@@ -15,40 +15,88 @@ namespace animestr
             this.page = page;
         }
 
+        public string GetTitle()
+        {
+            return GetSection("<h1", @"</h1", "span"); ;
+        }
+
         /// <summary>
-        /// On "search result" pages
+        /// For search result pages
         /// </summary>
         public string GetLinkSection()
         {
-            bool linkSectionFound = false;
+            return GetSection("<a", @"</a", "strong");
+        }
+
+        /// <summary>
+        /// Gets substring of the text - marked by two strings
+        /// </summary>
+        /// <param name="text">text</param>
+        /// <param name="m1">opening marker</param>
+        /// <param name="m2">closing marker</param>
+        /// <returns></returns>
+        public static string GetBetween(string text, string m1, string m2)
+        {
+            int oIndex = text.IndexOf(m1) + m1.Length;
+            return text.Substring(oIndex, text.IndexOf(m2, oIndex) - oIndex)
+        }
+
+        /// <summary>
+        /// Section selection
+        /// </summary>
+        /// <param name="tag1">Opening marker. E.g: "&lt;a"</param>
+        /// <param name="tag2">Closing marker. E.g: "&lt;/a"</param>
+        /// <param name="contain">text which must be within the two markers. Method will keep searching until a section with this text is found</param>
+        /// <returns></returns>
+        public string GetSection(string tag1, string tag2, params string[] contains)
+        {
+            bool found = false;
             int offset = 0;
-            string linkSection = null;
-            while (!linkSectionFound)
+            string section = null;
+            int no = 0;
+            while (!found)
             {
-                int aIndex = page.IndexOf("<a", offset);
+                int aIndex = page.IndexOf(tag1, offset);
                 if (aIndex < 0)
                 {
                     return null;
                 }
                 try
                 {
-                    linkSection = page.Substring(aIndex, page.IndexOf(@"</a", aIndex) - aIndex);
+                    section = page.Substring(aIndex, page.IndexOf(tag2, aIndex) - aIndex);
 
-                    if (linkSection.Contains("strong"))
+                    bool containsAll = true;
+
+                    foreach (string contain in contains)
                     {
-                        linkSectionFound = true;
+                        if (!section.Contains(contain))
+                        {
+                            containsAll = false;
+                        }
+                    }
+
+                    if (containsAll)
+                    {
+                        found = true;
                     }
                     else
                     {
-                        offset = aIndex + 2; //2 = "<a" length
+                        offset = aIndex + tag1.Length;
                     }
                 }
                 catch
                 {
                     return null;
                 }
+
+                if (no > page.Length)
+                {
+                    return null; //could not find section in the page
+                }
+
+                no++;
             }
-            return linkSection;
+            return section;
         }
     }
 }

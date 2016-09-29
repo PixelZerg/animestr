@@ -16,7 +16,7 @@ namespace animestr
 	{
 		public static void Main (string[] args)
 		{
-            Console.WriteLine(AnimeInfo.GetMALUrl("seitokai"));
+            Console.WriteLine(new MALParser(AnimeInfo.GetMALPage("seitokai")).GetTitle());
 		}
     }
 }
