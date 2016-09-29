@@ -30,9 +30,12 @@ namespace animestr
 
         public void LoadFromMAL()
         {
-            if (title != null)
+            if (this.title != null)
             {
-
+                using (WebClient wc = new WebClient())
+                {
+                    string page = wc.DownloadString(GetMALUrl(this.title));
+                }
             }
         }
 
@@ -40,38 +43,12 @@ namespace animestr
         {
             using (WebClient wc = new WebClient())
             {
-                string searchPage = wc.DownloadString(@"http://myanimelist.net/anime.php?q=" + query);
+                string searchPage = wc.DownloadString(@"http://myanimelist.net/anime.php?q=" + Uri.EscapeDataString(query));
 
-                bool linkSectionFound = false;
-                int offset = 0;
-                string l = null;
-                while (!linkSectionFound)
-                {
-                    int aIndex = searchPage.IndexOf("<a", offset);
-                    if (aIndex < 0)
-                    {
-                        return null;
-                    }
-                    try
-                    {
-                        l = searchPage.Substring(aIndex, searchPage.IndexOf(@"</a", aIndex) - aIndex);
+                string linkSection = new MALParser(searchPage).GetLinkSection();
 
-                        if (l.Contains("strong"))
-                        {
-                            linkSectionFound = true;
-                        }
-                        else
-                        {
-                            offset = aIndex + 2; //2 = "<a" length
-                        }
-                    }
-                    catch
-                    {
-                        return null;
-                    }
-                }
-                int hIndex = l.IndexOf("href=\"") + 6;
-                return l.Substring(hIndex, l.IndexOf("\"", hIndex) - hIndex);
+                int hIndex = linkSection.IndexOf("href=\"") + 6;
+                return linkSection.Substring(hIndex, linkSection.IndexOf("\"", hIndex) - hIndex);
             }
         }
     }
