@@ -11,7 +11,7 @@ namespace animestr
     {
         public string title = null;
         public string description = null;
-        public string alts = null;
+        public List<string> alts = new List<string>();
         public List<string> genres = new List<string>();
 
         //MAL
@@ -19,7 +19,7 @@ namespace animestr
         public string rank = null;
         public string popularity = null;
 
-        public bool usedMAL { get; private set; }
+        public string MALPage = null;
 
         public AnimeInfo() { }
         public AnimeInfo(string title)
@@ -31,10 +31,15 @@ namespace animestr
         {
             if (this.title != null)
             {
-                using (WebClient wc = new WebClient())
-                {
-                    string page = wc.DownloadString(GetMALPage(this.title));
-                }
+                MALPage = GetMALPage(this.title);
+                MALParser mal = new MALParser(MALPage);
+                this.title = mal.GetTitle();
+                this.description = mal.GetDescription();
+                this.alts = mal.GetAlts();
+                this.genres = mal.GetGenres();
+                this.score = mal.GetScore();
+                this.rank = mal.GetRank();
+                this.popularity = mal.GetPopularity();
             }
         }
 
