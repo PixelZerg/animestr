@@ -8,6 +8,7 @@ namespace animestr
 {
     public class AnimeInfo
     {
+        public string title = null;
         public string description = null;
         public string alts = null;
         public List<string> genres = new List<string>();
