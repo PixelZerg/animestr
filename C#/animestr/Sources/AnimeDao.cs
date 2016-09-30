@@ -57,7 +57,13 @@ namespace animestr.Sources
             }
 
             string script = Parsing.GetSection(page, "<script>", "</script>", "dfea");
-            Console.WriteLine(script);
+            //Console.WriteLine(script);
+
+            foreach (string s in Parsing.GetBetweens(script, "var", "\".dfea"))
+            {
+                Console.WriteLine(s);
+                Utils.PrintBreak('-');
+            }
 
             return ret;
         }
