@@ -38,9 +38,9 @@ namespace animestr
 				if (i < items.Count) {
 					Console.WriteLine ((i < 9 ? " " : "") + (i + 1) + "| " + (items[i].Length>=Console.WindowWidth-8-i.ToString().Length ? items[i].Substring(0,Console.WindowWidth-8-i.ToString().Length)+"...": items[i]));
 				} else {
-					Console.WriteLine ();//padding
+                    Console.WriteLine();//padding
 				}
-				Console.ResetColor ();
+                Console.ResetColor();
 			}
 		}
 

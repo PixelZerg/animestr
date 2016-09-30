@@ -21,10 +21,10 @@ namespace animestr
         public AnimeInfo() { }
         public AnimeInfo(string title)
         {
-            this.LoadFromMAL(title);
+            this.title = title;
         }
 
-        public void LoadFromMAL(string title)
+        public void LoadFromMAL()
         {
             if (this.title != null)
             {
