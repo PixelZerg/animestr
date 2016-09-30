@@ -17,6 +17,7 @@ namespace animestr
         public string popularity = null;
 
         public string MALPage = null;
+        public string MALUrl = null;
 
         public AnimeInfo() { }
         public AnimeInfo(string title)
@@ -28,7 +29,7 @@ namespace animestr
         {
             if (this.title != null)
             {
-                MALPage = GetMALPage(this.title);
+                MALPage = GetMALPage(this.title, out this.MALUrl);
                 MALParser mal = new MALParser(MALPage);
                 this.title = mal.GetTitle();
                 this.description = mal.GetDescription();
@@ -40,13 +41,13 @@ namespace animestr
             }
         }
 
-        public static string GetMALPage(string query)
+        public static string GetMALPage(string query, out string malUrl)
         {
             using (WebClient wc = new WebClient())
             {
                 string searchPage = wc.DownloadString(@"http://myanimelist.net/anime.php?q=" + Uri.EscapeDataString(query));
-
-                return wc.DownloadString(MALParser.GetBetween(new MALParser(searchPage).GetLinkSection(), "href=\"","\""));
+                malUrl = MALParser.GetBetween(new MALParser(searchPage).GetLinkSection(), "href=\"", "\"");
+                return wc.DownloadString(malUrl);
             }
         }
     }

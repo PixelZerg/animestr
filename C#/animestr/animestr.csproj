@@ -36,6 +36,8 @@
   <ItemGroup>
     <Compile Include="AnimeData.cs" />
     <Compile Include="AnimeInfo.cs" />
+    <Compile Include="consts.cs" />
+    <Compile Include="EpisodeData.cs" />
     <Compile Include="IAnimeParser.cs" />
     <Compile Include="MALParser.cs" />
     <Compile Include="Program.cs" />
