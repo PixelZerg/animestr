@@ -7,7 +7,7 @@ namespace animestr
 {
 	public class AnimeEntry
 	{
-		public string name = "unkown";
+		public string title = "unkown";
 		public Uri pictureUrl = null;
         public Uri url = null;
 
@@ -20,7 +20,7 @@ namespace animestr
 		public AnimeEntry(string name, Uri url, Uri picUrl)
 		{
             this.url = url;
-			this.name = name;
+			this.title = name;
 			this.pictureUrl = picUrl;
 		}
 
@@ -43,7 +43,7 @@ namespace animestr
         public override string ToString()
         {
             return "Anime Entry =>" + Environment.NewLine
-                  + "\tName: " + this.name + Environment.NewLine
+                  + "\tName: " + this.title + Environment.NewLine
                   + "\tUrl: " + this.url + Environment.NewLine
                   + "\tPicture: " + this.pictureUrl;
         }
