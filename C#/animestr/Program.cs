@@ -21,7 +21,7 @@ namespace animestr
             //Console.WriteLine(string.Join(Environment.NewLine+Environment.NewLine,new Sources.AnimeDao().GetRecommendations()));
             //Console.WriteLine(string.Join(Environment.NewLine + Environment.NewLine, new Sources.AnimeDao().GetSearchResults("moo")));
             Sources.AnimeDao animeDao = new Sources.AnimeDao();
-            animeDao.GetData(animeDao.GetSearchResults("the crimson moon")[0]);
+            animeDao.GetMRLs(animeDao.GetData(animeDao.GetSearchResults("the crimson moon")[0]).episodes[0].pageLink.AbsoluteUri);
         }
     }
 }

@@ -48,7 +48,18 @@ namespace animestr.Sources
 
         public Dictionary<string, string> GetMRLs(string epPageUrl)
         {
-            throw new NotImplementedException();
+            Dictionary<string, string> ret = new Dictionary<string, string>();
+
+            string page = "";
+            using (WebClient wc = new WebClient())
+            {
+                page = wc.DownloadString(epPageUrl);
+            }
+
+            string script = Parsing.GetSection(page, "<script>", "</script>", "dfea");
+            Console.WriteLine(script);
+
+            return ret;
         }
 
         public List<AnimeEntry> GetRecommendations()
