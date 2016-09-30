@@ -38,7 +38,7 @@ namespace animestr.Sources
 
                     entry.url = Parsing.AbsUri(Consts.AD_BASE, Parsing.GetBetween(dom.InnerHTML, "href=\"", "\""));
                     entry.pictureUrl = Parsing.AbsUri(Consts.AD_BASE, Parsing.GetBetween(dom.InnerHTML, "data-original=\"", "\""));
-                    entry.name = Parsing.GetBetween(Parsing.GetBetween(dom.InnerHTML, "<h3>", "</h3>"),">","<").Trim();
+                    entry.name = Parsing.Format(Parsing.GetBetween(Parsing.GetBetween(dom.InnerHTML, "<h3>", "</h3>"),">","<").Trim());
 
                     ret.Add(entry);
                 }
@@ -50,7 +50,30 @@ namespace animestr.Sources
 
         public List<AnimeEntry> GetSearchResults(string query)
         {
-            throw new NotImplementedException();
+            List<AnimeEntry> ret = new List<AnimeEntry>();
+
+            string page = "";
+            using (WebClient wc = new WebClient())
+            {
+                page = wc.DownloadString(Consts.AD_SEARCH + "/" + Uri.EscapeDataString(query));
+            }
+
+            foreach (var dom in new CQ(page).Select(".animelist_poster"))
+            {
+                try
+                {
+                    AnimeEntry entry = new AnimeEntry();
+
+                    entry.url = Parsing.AbsUri(Consts.AD_BASE, Parsing.GetBetween(dom.InnerHTML, "href=\"", "\""));
+                    entry.pictureUrl = Parsing.AbsUri(Consts.AD_BASE, Parsing.GetBetween(dom.InnerHTML, "data-original=\"", "\""));
+                    entry.name = Parsing.Format(Parsing.GetBetween(Parsing.GetBetween(dom.InnerHTML, "<center>", "</center>"), ">", "<").Trim());
+
+                    ret.Add(entry);
+                }
+                catch { }
+            }
+
+            return ret;
         }
     }
 }
