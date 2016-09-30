@@ -35,9 +35,9 @@ namespace animestr
                 this.synopsis = "";
                 try
                 {
-                    foreach (string s in MALParser.GetBetweens(MALParser.GetBetween(MALParser.GetSection(page, "<div ", "</div>", "Synopsis</h2>"), "</h2", consts.noString), ">", "<"))
+                    foreach (string s in Parsing.GetBetweens(Parsing.GetBetween(Parsing.GetSection(page, "<div ", "</div>", "Synopsis</h2>"), "</h2", consts.noString), ">", "<"))
                     {
-                        synopsis += MALParser.Format(s).Trim() + Environment.NewLine;
+                        synopsis += Parsing.Format(s).Trim() + Environment.NewLine;
                     }
                 }
                 catch
@@ -45,7 +45,7 @@ namespace animestr
                     this.synopsis = "Unable to get synopsis.";
                 }
 
-                string titleSection = MALParser.GetSection(page, "<h2 ", "</h2>", "fs", "#");
+                string titleSection = Parsing.GetSection(page, "<h2 ", "</h2>", "fs", "#");
                 int lIndex = titleSection.LastIndexOf('>')+1;
                 this.title = titleSection.Substring(lIndex, titleSection.Length - lIndex);
             }

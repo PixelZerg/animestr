@@ -46,7 +46,7 @@ namespace animestr
             using (WebClient wc = new WebClient())
             {
                 string searchPage = wc.DownloadString(@"http://myanimelist.net/anime.php?q=" + Uri.EscapeDataString(query));
-                malUrl = MALParser.GetBetween(new MALParser(searchPage).GetLinkSection(), "href=\"", "\"");
+                malUrl = Parsing.GetBetween(new MALParser(searchPage).GetLinkSection(), "href=\"", "\"");
                 return wc.DownloadString(malUrl);
             }
         }
