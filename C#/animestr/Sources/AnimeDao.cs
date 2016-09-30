@@ -48,6 +48,8 @@ namespace animestr.Sources
 
         public Dictionary<string, string> GetMRLs(string epPageUrl)
         {
+            //TODO: review
+
             Dictionary<string, string> ret = new Dictionary<string, string>();
 
             string page = "";
