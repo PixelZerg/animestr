@@ -8,6 +8,11 @@ namespace animestr
 {
     public static class Parsing
     {
+        public static Uri AbsUri(string baseUrl, string relUrl)
+        {
+            return new Uri(new Uri(baseUrl), relUrl);
+        }
+
         /// <summary>
         /// Gets substring of the text - marked by two strings
         /// </summary>

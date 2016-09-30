@@ -18,7 +18,7 @@ namespace animestr
         AnimeData GetData(AnimeEntry entry);
 
         List<AnimeEntry> GetRecommendations();
-        List<AnimeEntry> GetSearchResult(string query);
+        List<AnimeEntry> GetSearchResults(string query);
 
     }
 }

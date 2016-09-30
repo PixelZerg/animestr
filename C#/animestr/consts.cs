@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace animestr
 {
-    public static class consts
+    public static class Consts
     {
         public const string noString = "BA";
+
+        public const string AD_BASE = "http://animedao.me";
+        public const string AD_POPULAR = "http://animedao.me/popular-anime";
     }
 }

@@ -35,7 +35,7 @@ namespace animestr
                 this.synopsis = "";
                 try
                 {
-                    foreach (string s in Parsing.GetBetweens(Parsing.GetBetween(Parsing.GetSection(page, "<div ", "</div>", "Synopsis</h2>"), "</h2", consts.noString), ">", "<"))
+                    foreach (string s in Parsing.GetBetweens(Parsing.GetBetween(Parsing.GetSection(page, "<div ", "</div>", "Synopsis</h2>"), "</h2", Consts.noString), ">", "<"))
                     {
                         synopsis += Parsing.Format(s).Trim() + Environment.NewLine;
                     }

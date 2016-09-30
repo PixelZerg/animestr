@@ -8,3 +8,5 @@ C:\Users\user\Documents\Visual Studio 2015\Projects\animestr\C#\animestr\obj\x86
 C:\Users\user\Documents\Visual Studio 2015\Projects\animestr\C#\animestr\obj\x86\Debug\animestr.csprojResolveAssemblyReference.cache
 C:\Users\user\Documents\Visual Studio 2015\Projects\animestr\C#\animestr\bin\Debug\animestr.exe
 C:\Users\user\Documents\Visual Studio 2015\Projects\animestr\C#\animestr\bin\Debug\animestr.pdb
+C:\Users\PixelZerg\Documents\GitHub\animestr\C#\animestr\bin\Debug\CsQuery.dll
+C:\Users\PixelZerg\Documents\GitHub\animestr\C#\animestr\bin\Debug\CsQuery.xml

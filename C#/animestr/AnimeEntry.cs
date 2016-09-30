@@ -39,6 +39,14 @@ namespace animestr
 
 			return bmp;
 		}
-	}
+
+        public override string ToString()
+        {
+            return "Anime Entry =>" + Environment.NewLine
+                  + "\tName: " + this.name + Environment.NewLine
+                  + "\tUrl: " + this.url + Environment.NewLine
+                  + "\tPicture: " + this.pictureUrl;
+        }
+    }
 }
 

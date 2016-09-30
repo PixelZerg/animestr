@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using CsQuery;
 
 namespace animestr.Sources
 {
@@ -21,20 +22,33 @@ namespace animestr.Sources
 
         public List<AnimeEntry> GetRecommendations()
         {
+            List<AnimeEntry> ret = new List<AnimeEntry>();
+
             string page = "";
             using (WebClient wc = new WebClient())
             {
-                page = wc.DownloadString("http://animedao.me/popular-anime");
+                page = wc.DownloadString(Consts.AD_POPULAR);
             }
-            foreach (string section in Parsing.GetSections(page, "<div class=\"well\">", "</div>", "\"row\""))
+
+            foreach (var dom in new CQ(page).Select(".well .row"))
             {
-                Console.WriteLine(section);
-                Utils.PrintBreak('-');
+                try
+                {
+                    AnimeEntry entry = new AnimeEntry();
+
+                    entry.url = Parsing.AbsUri(Consts.AD_BASE, Parsing.GetBetween(dom.InnerHTML, "href=\"", "\""));
+                    entry.pictureUrl = Parsing.AbsUri(Consts.AD_BASE, Parsing.GetBetween(dom.InnerHTML, "data-original=\"", "\""));
+                    entry.name = Parsing.GetBetween(Parsing.GetBetween(dom.InnerHTML, "<h3>", "</h3>"),">","<").Trim();
+
+                    ret.Add(entry);
+                }
+                catch { }
             }
-            return null;
+
+            return ret;
         }
 
-        public List<AnimeEntry> GetSearchResult(string query)
+        public List<AnimeEntry> GetSearchResults(string query)
         {
             throw new NotImplementedException();
         }
