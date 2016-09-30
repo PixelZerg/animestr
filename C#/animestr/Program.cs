@@ -17,7 +17,8 @@ namespace animestr
 		public static void Main (string[] args)
 		{
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Console.WriteLine(new EpisodeData(3).LoadFromMAL(@"https://myanimelist.net/anime/11111/Another").synopsis);
+            //Console.WriteLine(new EpisodeData(3).LoadFromMAL(@"https://myanimelist.net/anime/11111/Another").synopsis);
+            Console.WriteLine(new Sources.AnimeDao().GetRecommendations());
         }
     }
 }

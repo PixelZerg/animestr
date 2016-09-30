@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,7 +21,17 @@ namespace animestr.Sources
 
         public List<AnimeEntry> GetRecommendations()
         {
-            throw new NotImplementedException();
+            string page = "";
+            using (WebClient wc = new WebClient())
+            {
+                page = wc.DownloadString("http://animedao.me/popular-anime");
+            }
+            foreach (string section in Parsing.GetSections(page, "<div class=\"well\">", "</div>", "\"row\""))
+            {
+                Console.WriteLine(section);
+                Utils.PrintBreak('-');
+            }
+            return null;
         }
 
         public List<AnimeEntry> GetSearchResult(string query)

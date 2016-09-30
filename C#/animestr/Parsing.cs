@@ -114,5 +114,75 @@ namespace animestr
             }
             return section;
         }
+
+        /// <summary>
+        /// Sections selection
+        /// </summary>
+        /// <param name="tag1">Opening marker. E.g: "&lt;a"</param>
+        /// <param name="tag2">Closing marker. E.g: "&lt;/a"</param>
+        /// <param name="contain">text which must be within the two markers. Method will keep searching until a section with this text is found</param>
+        /// <returns></returns>
+        public static List<string> GetSections(string text, string tag1, string tag2, params string[] contains)
+        {
+            List<string> ret = new List<string>();
+            int overOffset = 0;
+            bool done = false;
+            while (!done)
+            {
+                bool found = false;
+                int offset = overOffset;
+                string section = null;
+                int no = 0;
+                while (!found)
+                {
+                    int aIndex = text.IndexOf(tag1, offset);
+                    if (aIndex < 0)
+                    {
+                        done = true;
+                        break;
+                    }
+                    try
+                    {
+                        section = text.Substring(aIndex, text.IndexOf(tag2, aIndex) - aIndex);
+
+                        bool containsAll = true;
+
+                        foreach (string contain in contains)
+                        {
+                            if (!section.Contains(contain))
+                            {
+                                containsAll = false;
+                            }
+                        }
+
+                        if (containsAll)
+                        {
+                            found = true;
+                            overOffset = aIndex + section.Length + tag2.Length;
+                        }
+                        else
+                        {
+                            offset = aIndex + tag1.Length;
+                        }
+                    }
+                    catch
+                    {
+                        done = true;
+                        break;
+                    }
+
+                    if (no > text.Length)
+                    {
+                        done = true;
+                        break; //could not find section in the page
+                    }
+
+                    no++;
+                }
+                ret.Add(section);
+            }
+
+            return ret;
+        }
     }
 }
