@@ -19,19 +19,6 @@ namespace animestr
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 
-            while (true)
-            {
-                Console.WriteLine("Enter anime title:");
-                MALParser mal = new MALParser(AnimeInfo.GetMALPage(Console.ReadLine()));
-                Console.WriteLine("Title: " + mal.GetTitle());
-                Console.WriteLine("Alt Titles: " + string.Join(", ", mal.GetAlts()));
-                Console.WriteLine("Genres: " + string.Join(", ", mal.GetGenres()));
-                Console.WriteLine("Score: " + mal.GetScore());
-                Console.WriteLine("Rank: " + mal.GetRank());
-                Console.WriteLine("Popularity: " + mal.GetPopularity());
-                Console.WriteLine("Description: " + mal.GetDescription());
-            }
-
         }
     }
 }

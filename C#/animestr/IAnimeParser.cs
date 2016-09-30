@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace animestr
 {
-    public class AnimeData
+    public interface IAnimeParser
     {
-        public AnimeEntry entry = null;
-        public AnimeInfo info = null;
-
+        List<AnimeEntry> GetRecommendations();
+        void GetEpisodeData();
     }
 }
