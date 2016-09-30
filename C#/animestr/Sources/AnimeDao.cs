@@ -59,10 +59,11 @@ namespace animestr.Sources
             string script = Parsing.GetSection(page, "<script>", "</script>", "dfea");
             //Console.WriteLine(script);
 
-            foreach (string s in Parsing.GetBetweens(script, "var", "\".dfea"))
+            foreach (string s in Parsing.GetBetweens(script, "var", ".dfea"))
             {
-                Console.WriteLine(s);
-                Utils.PrintBreak('-');
+                string videoCode = Utils.ROT13(Parsing.GetBetween(s, "\"", "\""));
+                string name = s.Substring(0, s.IndexOf("\"") - 2).Trim();
+                ret.Add(name, Consts.AD_BASE + "/redirect/" + videoCode);
             }
 
             return ret;
