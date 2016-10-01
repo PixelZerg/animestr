@@ -46,10 +46,9 @@ namespace animestr
 
         public bool splashDone = false;
 
-        public void DisplaySplash(string text)
+        public void DisplaySplash(string text, bool resetColour = false)
         {
             splashDone = false;
-            Utils.ClearConsole();
             if (Console.WindowHeight > 8 && Console.WindowWidth > 52)
             {
                 int no = 0;
@@ -58,6 +57,8 @@ namespace animestr
                     string[][] frames = (no % 2 != 0 ? Consts.ASCII_TEXT_FRAMES_REV : Consts.ASCII_TEXT_FRAMES);
                     foreach (string[] frame in frames)
                     {
+                        Utils.ClearConsole();
+
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         int offy = ((Console.WindowHeight - 6) / 2) + 1;
 
@@ -90,7 +91,10 @@ namespace animestr
                             Console.WriteLine();
                         }
 
-                        Console.ResetColor();
+                        if (resetColour)
+                        {
+                            Console.ResetColor();
+                        }
                         for (int i = 0; i < 200; i++)
                         {
                             if (!splashDone)
@@ -99,7 +103,10 @@ namespace animestr
                             }
                             else
                             {
-                                Console.ResetColor();
+                                if (resetColour)
+                                {
+                                    Console.ResetColor();
+                                }
                                 return;
                             }
                         }
@@ -131,7 +138,10 @@ namespace animestr
                 {
                     Console.WriteLine();
                 }
-                Console.ResetColor();
+                if (resetColour)
+                {
+                    Console.ResetColor();
+                }
                 while (!splashDone) {}
             }
 
