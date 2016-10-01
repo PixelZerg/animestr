@@ -8,6 +8,8 @@ namespace animestr
 		public List<string> items = new List<string>();
 		public string title = "list";
 
+        public int curPageNo = 1;
+
 		public ConsoleList ()
 		{
 		}
@@ -67,6 +69,28 @@ namespace animestr
 			Console.WriteLine (text);
 			Utils.PrintBreak ('-');
 		}
+
+        /// <summary>
+		/// Prints the list at the current page number
+		/// </summary>
+        public void PrintList()
+        {
+            PrintList(this.curPageNo);
+        }
+        /// <summary>
+		/// Prints the list at the current page number
+		/// </summary>
+        public void PrintList(string text)
+        {
+            PrintList(text, this.curPageNo);
+        }
+
+        public void Reset()
+        {
+            this.curPageNo = 1;
+            this.items.Clear();
+            this.title = "list";
+        }
 
         private void PrintHeader(int pageNo)
         {
