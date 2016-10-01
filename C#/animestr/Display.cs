@@ -53,14 +53,18 @@ namespace animestr
                     }
                     return;
                 }
-                else if(k.Key == ConsoleKey.LeftArrow || k.KeyChar == '>')
+                else if (k.Key == ConsoleKey.LeftArrow || k.KeyChar == '>')
                 {
+                    Utils.ClearConsole();
+
                     clist.PrintList(++clist.curPageNo);
+                    ReadCommand();
                     //TODO: more work here
                     return;
                 }
             }
-            else if (k.Key == ConsoleKey.H || k.KeyChar == '?')
+
+            if (k.Key == ConsoleKey.H || k.KeyChar == '?')
             {
                 Utils.ClearConsole();
                 ShowHelp();
@@ -86,6 +90,7 @@ namespace animestr
             Console.WriteLine("HELP:");
             Console.WriteLine("Search for anime by starting your command with '/' or '.'");
             Console.WriteLine("If you are looking at a list, you can SELECT an item by entering the item's index in the list.");
+            Console.WriteLine("You can also use the arrow keys or '>' and '<' to change pages");
         }
 
         private void ShowRecomendations()
