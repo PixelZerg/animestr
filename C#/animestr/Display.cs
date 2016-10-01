@@ -29,24 +29,35 @@ namespace animestr
             Console.ForegroundColor = Console.BackgroundColor;
             ConsoleKeyInfo k = Console.ReadKey();
 
-            if (Char.IsNumber(k.KeyChar) && clist != null) //selecting something in the clist
+            if (clist != null) //selecting something in the clist
             {
-                Utils.ClearConsole();
-
-                clist.PrintList(1);
-
-                Console.BackgroundColor = ConsoleColor.Blue;
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write("Select:");
-                Console.ResetColor();
-                Console.Write(" " + k.KeyChar);
-                try
+                if (Char.IsNumber(k.KeyChar))
                 {
-                    int selNo = Int32.Parse(k.KeyChar + Console.ReadLine());
+                    Utils.ClearConsole();
+
+                    clist.PrintList();
+
+                    Console.BackgroundColor = ConsoleColor.Blue;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("Select:");
+                    Console.ResetColor();
+                    Console.Write(" " + k.KeyChar);
+                    try
+                    {
+                        int selNo = Int32.Parse(k.KeyChar + Console.ReadLine());
+                        //TODO: do stuff here
+                    }
+                    catch
+                    {
+                        InvalidCommand("Invalid index!");
+                    }
+                    return;
                 }
-                catch
+                else if(k.Key == ConsoleKey.LeftArrow || k.KeyChar == '>')
                 {
-                    InvalidCommand("Invalid index!");
+                    clist.PrintList(++clist.curPageNo);
+                    //TODO: more work here
+                    return;
                 }
             }
             else if (k.Key == ConsoleKey.H || k.KeyChar == '?')
@@ -94,7 +105,7 @@ namespace animestr
                 clist.items.Add(recommendation.title);
             }
             curEntryList = recommendations;
-            clist.PrintList(1);
+            clist.PrintList();
 
             ReadCommand();
         }
