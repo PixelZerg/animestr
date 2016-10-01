@@ -16,12 +16,11 @@ namespace animestr
 	{
 		public static void Main (string[] args)
 		{
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
             //Console.WriteLine(new EpisodeData(3).LoadFromMAL(@"https://myanimelist.net/anime/11111/Another").synopsis);
             //Console.WriteLine(string.Join(Environment.NewLine+Environment.NewLine,new Sources.AnimeDao().GetRecommendations()));
             //Console.WriteLine(string.Join(Environment.NewLine + Environment.NewLine, new Sources.AnimeDao().GetSearchResults("moo")));
-            Sources.AnimeDao animeDao = new Sources.AnimeDao();
-            animeDao.GetMRLs(animeDao.GetData(animeDao.GetSearchResults("the crimson moon")[0]).episodes[0].pageLink.AbsoluteUri);
+
+            new Display().Show();
         }
     }
 }

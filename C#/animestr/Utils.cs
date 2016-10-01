@@ -19,7 +19,10 @@ namespace animestr
 			{
 				Console.WriteLine ();
 			}
+            ConsoleColor store = Console.ForegroundColor;
+            Console.ForegroundColor = Console.BackgroundColor;
 			Console.WriteLine(((char)27)+"c");// = \ec = clear (on some terminals)
+            Console.ForegroundColor = store;
 		}
 
         /// <summary>

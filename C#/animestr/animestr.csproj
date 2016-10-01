@@ -41,6 +41,7 @@
     <Compile Include="AnimeData.cs" />
     <Compile Include="AnimeInfo.cs" />
     <Compile Include="Consts.cs" />
+    <Compile Include="Display.cs" />
     <Compile Include="EpisodeData.cs" />
     <Compile Include="IAnimeSource.cs" />
     <Compile Include="MALParser.cs" />
