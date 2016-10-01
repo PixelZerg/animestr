@@ -10,7 +10,9 @@ namespace animestr
     {
         public IAnimeSource source = null;
 
-        private ConsoleList clist = new ConsoleList();
+        //set to null when not in use so invalid commands can be handled properly
+        private ConsoleList clist = null;
+        private List<AnimeEntry> curEntryList = null;
 
         public Display()
         {
@@ -20,6 +22,59 @@ namespace animestr
         public void Show()
         {
             ShowRecomendations();
+        }
+
+        public void ReadCommand()
+        {
+            Console.ForegroundColor = Console.BackgroundColor;
+            ConsoleKeyInfo k = Console.ReadKey();
+
+            if (Char.IsNumber(k.KeyChar) && clist != null) //selecting something in the clist
+            {
+                Utils.ClearConsole();
+
+                clist.PrintList(1);
+
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("Select:");
+                Console.ResetColor();
+                Console.Write(" " + k.KeyChar);
+                try
+                {
+                    int selNo = Int32.Parse(k.KeyChar + Console.ReadLine());
+                }
+                catch
+                {
+                    InvalidCommand("Invalid index!");
+                }
+            }
+            else if (k.Key == ConsoleKey.H || k.KeyChar == '?')
+            {
+                Utils.ClearConsole();
+                ShowHelp();
+                ReadCommand();
+            }
+            else
+            {
+                InvalidCommand();
+            }
+        }
+
+        private void InvalidCommand(string msg = "Invalid command!")
+        {
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(msg+" Do ? or h for help");
+            Console.ResetColor();
+            ReadCommand();
+        }
+
+        public void ShowHelp()
+        {
+            Console.WriteLine("HELP:");
+            Console.WriteLine("Search for anime by starting your command with '/' or '.'");
+            Console.WriteLine("If you are looking at a list, you can SELECT an item by entering the item's index in the list.");
         }
 
         private void ShowRecomendations()
@@ -33,19 +88,18 @@ namespace animestr
             recommendations = source.GetRecommendations();
             splashDone = true;
 
-            clist.items.Clear();
-            clist.title = "Recommendations";
+            clist = new ConsoleList("Recommendations");
             foreach (AnimeEntry recommendation in recommendations)
             {
                 clist.items.Add(recommendation.title);
             }
+            curEntryList = recommendations;
             clist.PrintList(1);
 
-            Console.ReadLine();
+            ReadCommand();
         }
 
         public bool splashDone = false;
-
         public void DisplaySplash(string text, bool resetColour = false)
         {
             splashDone = false;
