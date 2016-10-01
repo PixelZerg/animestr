@@ -6,7 +6,7 @@ namespace animestr
 	{
 		public static void PrintBreak(char symbol)
 		{
-			for (int i = 0; i < Console.WindowWidth; i++) 
+			for (int i = 0; i < Console.WindowWidth-1; i++) 
 			{
 				Console.Write (symbol);
 			}

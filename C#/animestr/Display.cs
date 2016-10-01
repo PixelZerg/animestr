@@ -8,25 +8,54 @@ namespace animestr
 {
     public class Display
     {
+        public IAnimeSource source = null;
+
+        private ConsoleList clist = new ConsoleList();
+
         public Display()
         {
-
+            source = new Sources.AnimeDao();
         }
 
         public void Show()
         {
-            DisplaySplash("Loading recommendations...");
+            ShowRecomendations();
         }
+
+        private void ShowRecomendations()
+        {
+            List<AnimeEntry> recommendations = new List<AnimeEntry>();
+
+            new System.Threading.Thread(() =>
+            {
+                DisplaySplash("Loading recommendations...");
+            }).Start();
+            recommendations = source.GetRecommendations();
+            splashDone = true;
+
+            clist.items.Clear();
+            clist.title = "Recommendations";
+            foreach (AnimeEntry recommendation in recommendations)
+            {
+                clist.items.Add(recommendation.title);
+            }
+            clist.PrintList(1);
+
+            Console.ReadLine();
+        }
+
+        public bool splashDone = false;
 
         public void DisplaySplash(string text)
         {
+            splashDone = false;
             Utils.ClearConsole();
             if (Console.WindowHeight > 8 && Console.WindowWidth > 52)
             {
                 int no = 0;
-                while (true)
+                while (!splashDone)
                 {
-                    string[][] frames = (no % 2 == 0 ? Consts.ASCII_TEXT_FRAMES.Reverse().ToArray() : Consts.ASCII_TEXT_FRAMES);
+                    string[][] frames = (no % 2 != 0 ? Consts.ASCII_TEXT_FRAMES_REV : Consts.ASCII_TEXT_FRAMES);
                     foreach (string[] frame in frames)
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
@@ -61,7 +90,19 @@ namespace animestr
                             Console.WriteLine();
                         }
 
-                        System.Threading.Thread.Sleep(200);
+                        Console.ResetColor();
+                        for (int i = 0; i < 200; i++)
+                        {
+                            if (!splashDone)
+                            {
+                                System.Threading.Thread.Sleep(1); //did it this way so that the thread will stop within 1 ms of the value being changed
+                            }
+                            else
+                            {
+                                Console.ResetColor();
+                                return;
+                            }
+                        }
                     }
                     no++;
                 }
@@ -90,8 +131,9 @@ namespace animestr
                 {
                     Console.WriteLine();
                 }
+                Console.ResetColor();
+                while (!splashDone) {}
             }
-            Console.ResetColor();
 
         }
 

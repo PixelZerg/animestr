@@ -39,5 +39,8 @@ namespace animestr
         public static readonly string[][] ASCII_TEXT_FRAMES = new string[][] {
             ASCII_TEXT3,ASCII_TEXT3,ASCII_TEXT2,ASCII_TEXT1
             };
+        public static readonly string[][] ASCII_TEXT_FRAMES_REV = new string[][] {
+            ASCII_TEXT2,ASCII_TEXT3,ASCII_TEXT3
+            };
     }
 }

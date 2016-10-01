@@ -36,7 +36,7 @@ namespace animestr
 					Console.ForegroundColor = ConsoleColor.Yellow;
 				}
 				if (i < items.Count) {
-					Console.WriteLine ((i < 9 ? " " : "") + (i + 1) + "| " + (items[i].Length>=Console.WindowWidth-8-i.ToString().Length ? items[i].Substring(0,Console.WindowWidth-8-i.ToString().Length)+"...": items[i]));
+					Console.WriteLine ((i < 9 ? " " : "") + (i < 99 ? " " : "") + (i < 999 ? " " : "") + (i + 1)+ " |  " + (items[i].Length>=Console.WindowWidth-9-i.ToString().Length ? items[i].Substring(0,Console.WindowWidth-9-i.ToString().Length)+"...": items[i]));
 				} else {
                     Console.WriteLine();//padding
 				}
@@ -49,7 +49,10 @@ namespace animestr
 		/// </summary>
 		public void PrintList(int pageNo)
 		{
-			PrintList (0, 0, pageNo);
+            PrintHeader(pageNo);
+            Console.ResetColor();
+            Utils.PrintBreak('-');
+            PrintList(2, 0, pageNo);
 		}
 
 		/// <summary>
@@ -57,16 +60,24 @@ namespace animestr
 		/// </summary>
 		public void PrintList(string text, int pageNo)
 		{
-			Console.WriteLine(this.title + " - page " + pageNo+"/"+items.Count/(Console.WindowHeight - 3));
-			PrintList (1, 2, pageNo);//bottom 2 because line br:
+            PrintHeader(pageNo);
+            Console.ResetColor();
+            Utils.PrintBreak('-');
+            PrintList (2, 2, pageNo);//bottom 2 because line br:
 			Console.WriteLine (text);
 			Utils.PrintBreak ('-');
 		}
 
-		/// <summary>
-		/// Prints the list. NB: pageNo is 1-based. It starts with a 1 not a 0! This constructor is the same as (text, pageNo) except you can also specify rel sizes. A relOffBottom of -1 would, for example, limit the lists's height by 1 row.
-		/// </summary>
-		public void PrintList(string text, int pageNo, int relOffTop, int relOffBottom)
+        private void PrintHeader(int pageNo)
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("  no |  "+this.title + " - page " + pageNo + "/" + items.Count / (Console.WindowHeight - 3));
+        }
+
+        /// <summary>
+        /// Prints the list. NB: pageNo is 1-based. It starts with a 1 not a 0! This constructor is the same as (text, pageNo) except you can also specify rel sizes. A relOffBottom of -1 would, for example, limit the lists's height by 1 row.
+        /// </summary>
+        public void PrintList(string text, int pageNo, int relOffTop, int relOffBottom)
 		{
 			Console.WriteLine(this.title + " - page " + pageNo+"/"+items.Count/(Console.WindowHeight - 3));
 			PrintList (1+relOffTop, 2+relOffBottom, pageNo);//bottom 2 because line br:
