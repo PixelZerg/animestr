@@ -23,36 +23,47 @@ namespace animestr
             Utils.ClearConsole();
             if (Console.WindowHeight > 8 && Console.WindowWidth > 52)
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                int offy = ((Console.WindowHeight - 6) / 2) + 1;
-
-                int offx = (Console.WindowWidth - 52) / 2;
-                foreach (string row in Consts.ASCII_TEXT)
+                int no = 0;
+                while (true)
                 {
-                    for (int i = 0; i < offx; i++)
+                    string[][] frames = (no % 2 == 0 ? Consts.ASCII_TEXT_FRAMES.Reverse().ToArray() : Consts.ASCII_TEXT_FRAMES);
+                    foreach (string[] frame in frames)
                     {
-                        Console.Write(' ');
-                    }
-                    Console.WriteLine(row);
-                }
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                string s = "v" + Consts.VERSION;
-                for (int i = 0; i < offx + (39 - s.Length); i++)//39=3/4 of 52/
-                {
-                    Console.Write(' ');
-                }
-                Console.WriteLine(s);
-                Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.White;
-                for (int i = 0; i < (Console.WindowWidth / 2) - (text.Length / 2); i++)
-                {
-                    Console.Write(' ');
-                }
-                Console.WriteLine(text);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        int offy = ((Console.WindowHeight - 6) / 2) + 1;
 
-                for (int i = 0; i < offy; i++)
-                {
-                    Console.WriteLine();
+                        int offx = (Console.WindowWidth - 52) / 2;
+                        foreach (string row in frame)
+                        {
+                            for (int i = 0; i < offx; i++)
+                            {
+                                Console.Write(' ');
+                            }
+                            Console.WriteLine(row);
+                        }
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        string s = "v" + Consts.VERSION;
+                        for (int i = 0; i < offx + (39 - s.Length); i++)//39=3/4 of 52/
+                        {
+                            Console.Write(' ');
+                        }
+                        Console.WriteLine(s);
+                        Console.WriteLine();
+                        Console.ForegroundColor = ConsoleColor.White;
+                        for (int i = 0; i < (Console.WindowWidth / 2) - (text.Length / 2); i++)
+                        {
+                            Console.Write(' ');
+                        }
+                        Console.WriteLine(text);
+
+                        for (int i = 0; i < offy; i++)
+                        {
+                            Console.WriteLine();
+                        }
+
+                        System.Threading.Thread.Sleep(200);
+                    }
+                    no++;
                 }
             }
             else

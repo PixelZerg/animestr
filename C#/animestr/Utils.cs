@@ -15,7 +15,7 @@ namespace animestr
 
 		public static void ClearConsole()
 		{
-			for (int i = 0; i < Console.WindowHeight*2; i++) 
+			for (int i = 0; i < Console.WindowHeight; i++) 
 			{
 				Console.WriteLine ();
 			}

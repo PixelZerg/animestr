@@ -16,11 +16,28 @@ namespace animestr
         public const string AD_POPULAR = "http://animedao.me/popular-anime";
         public const string AD_SEARCH = "http://animedao.me/search";
 
-        public static readonly string[] ASCII_TEXT =new string[] {
+        public static readonly string[] ASCII_TEXT3 = new string[] {
 @"               _)                         |         ",
 @"   _` |  __ \   |  __ `__ \    _ \   __|  __|   __| ",
 @"  (   |  |   |  |  |   |   |   __/ \__ \  |    |    ",
 @" \__,_| _|  _| _| _|  _|  _| \___| ____/ \__| _|    ",
 @"                                                    "};
+        public static readonly string[] ASCII_TEXT1 = new string[] {
+@"               ..                         .         ",
+@"   .. .  .. .   .  .. ... .    . .   ...  ...   ... ",
+@"  .   .  .   .  .  .   .   .   ... ... .  .    .    ",
+@" ...... ..  .. .. ..  ..  .. ..... ..... .... ..    ",
+@"                                                    "};
+
+        public static readonly string[] ASCII_TEXT2 = new string[] {
+@"               ,)                         ;         ",
+@"   ,` ;  ,, ;   ;  ,, `,, ;    , ;   ,,;  ,,;   ,,; ",
+@"  (   ;  ;   ;  ;  ;   ;   ;   ,,; ;,, ;  ;    ;    ",
+@" ;,,,,; ,;  ,; ,; ,;  ,;  ,; ;,,,; ,,,,; ;,,; ,;    ",
+@"                                                    "};
+
+        public static readonly string[][] ASCII_TEXT_FRAMES = new string[][] {
+            ASCII_TEXT3,ASCII_TEXT3,ASCII_TEXT2,ASCII_TEXT1
+            };
     }
 }
