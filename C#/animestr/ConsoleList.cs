@@ -7,6 +7,7 @@ namespace animestr
 	{
 		public List<string> items = new List<string>();
 		public string title = "list";
+        public string desc = "";
 
         public int curPageNo = 1;
 
@@ -27,10 +28,10 @@ namespace animestr
 		{
 		}
 
-		public ConsoleList(string title, params string[] args)
+        public ConsoleList(string title, string desc)
 		{
 			this.title = title;
-			this.items.AddRange(args);
+            this.desc = desc;
 		}
 
 		/// <summary>
@@ -69,20 +70,21 @@ namespace animestr
 //            PrintList(2, 0, pageNo);
 //		}
 
-        public void PrintList(int pageNo){
-            PrintList("", pageNo);
-        }
+//        public void PrintList(int pageNo){
+//            PrintList(this.desc, pageNo);
+//        }
+        //made redundant ^^
 
 		/// <summary>
 		/// Prints the list. NB: pageNo is 1-based. It starts with a 1 not a 0!
 		/// </summary>
-		public void PrintList(string text, int pageNo)
+		public void PrintList(int pageNo)
 		{
             PrintHeader(pageNo);
             Console.ResetColor();
             Utils.PrintBreak('-');
             PrintList (2, 2, pageNo);//bottom 2 because line br:
-			Console.WriteLine (text);
+            Console.WriteLine (this.desc);
 			Utils.PrintBreak ('-');
 		}
 
@@ -91,15 +93,15 @@ namespace animestr
 		/// </summary>
         public void PrintList()
         {
-            PrintList("",this.curPageNo);
+            PrintList(this.desc,this.curPageNo);
         }
-        /// <summary>
-		/// Prints the list at the current page number
-		/// </summary>
-        public void PrintList(string text)
-        {
-            PrintList(text, this.curPageNo);
-        }
+//        /// <summary>
+//		/// Prints the list at the current page number
+//		/// </summary>
+//        public void PrintList(string text)
+//        {
+//            PrintList(text, this.curPageNo);
+//        }
 
         public void Reset()
         {

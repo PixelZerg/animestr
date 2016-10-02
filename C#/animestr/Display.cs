@@ -45,11 +45,15 @@ namespace animestr
                     try
                     {
                         int selNo = Int32.Parse(k.KeyChar + Console.ReadLine());
-                        //TODO: do stuff here
+                        if(selNo<=clist.items.Count&&selNo>0){
+                            //TODO: do stuff here
+                        }else{
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                     catch
                     {
-                        InvalidCommand("Invalid index!");
+                        InvalidCommand("Please enter an integer within the range 1-"+clist.items.Count+"!");
                     }
                     return;
                 }
@@ -92,11 +96,19 @@ namespace animestr
                     try
                     {
                         int no = Int32.Parse(Console.ReadLine());
+                        if(no <= clist.pageCount&&no>0){
+                            clist.curPageNo = no;
+                            clist.PrintList();
+                            ReadCommand();
+                        }else{
+                            throw new IndexOutOfRangeException();
+                        }
                         //TODO: do stuff here
+
                     }
                     catch
                     {
-                        InvalidCommand("Please enter an integer within the range 1-"+clist.pageCount);
+                        InvalidCommand("Please enter an integer within the range 1-"+clist.pageCount+"!");
                     }
                     return;
                 }
@@ -128,7 +140,7 @@ namespace animestr
         public void ShowHelp()
         {
             Console.WriteLine("HELP:");
-            Console.WriteLine("Search for anime by starting your command with '/' or '.'");
+            Console.WriteLine("Search for anime by starting your command with '/'");
             Console.WriteLine();
             Console.WriteLine("List Interaction:");
             Console.WriteLine("SELECT an item by entering the item's index (no) in the list.");
@@ -147,7 +159,7 @@ namespace animestr
             recommendations = source.GetRecommendations();
             splashDone = true;
 
-            clist = new ConsoleList("Recommendations");
+            clist = new ConsoleList("Recommendations","Enter /{query} to search or [h]elp");
             foreach (AnimeEntry recommendation in recommendations)
             {
                 clist.items.Add(recommendation.title);
