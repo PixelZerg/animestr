@@ -84,8 +84,8 @@ namespace animestr
             Console.ResetColor();
             Utils.PrintBreak('-');
             PrintList (2, 2, pageNo);//bottom 2 because line br:
+            Utils.PrintBreak ('-');
             Console.WriteLine (this.desc);
-			Utils.PrintBreak ('-');
 		}
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace animestr
 		/// </summary>
         public void PrintList()
         {
-            PrintList(this.desc,this.curPageNo);
+            PrintList(this.curPageNo);
         }
 //        /// <summary>
 //		/// Prints the list at the current page number
