@@ -36,21 +36,21 @@ namespace animestr
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("Score: ");
                 Console.Write(data.info.score);
-                for (int i = 0; i < ((Console.WindowWidth-1) / 3) - 7 - data.info.score.Length; i++)
+                for (int i = 0; i < ((Console.WindowWidth-2) / 3) - 7 - data.info.score.Length; i++)
                 {
                     Console.Write(' ');
                 }
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("| Rank: ");
                 Console.Write(data.info.rank);
-                for (int i = 0; i < ((Console.WindowWidth-1) / 3) - 8 - data.info.rank.Length; i++)
+                for (int i = 0; i < ((Console.WindowWidth-2) / 3) - 8 - data.info.rank.Length; i++)
                 {
                     Console.Write(' ');
                 }
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.Write("| Popularity: ");
                 Console.Write(data.info.popularity);
-                for (int i = 0; i < ((Console.WindowWidth-1) / 3) - 14 - data.info.rank.Length; i++)
+                for (int i = 0; i < ((Console.WindowWidth-2) / 3) - 14 - data.info.rank.Length; i++)
                 {
                     Console.Write(' ');
                 }
