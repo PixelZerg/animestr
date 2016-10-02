@@ -18,7 +18,7 @@ namespace animestr
            // Console.ForegroundColor = Console.BackgroundColor;
            // Console.WriteLine(((char)27)+"c");// = \ec = clear (on some terminals)
            // Console.ResetColor();
-			for (int i = 0; i < Console.WindowHeight; i++) 
+			for (int i = 0; i < Console.WindowHeight*2; i++) 
 			{
 				Console.WriteLine ();
 			}

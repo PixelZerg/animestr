@@ -132,7 +132,7 @@ namespace animestr
         private void InvalidCommand(string msg = "Invalid command!")
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(msg+" Do ? or h for help");
+            Console.WriteLine(msg+" Do ? or h for help. Try again.");
             Console.ResetColor();
             ReadCommand();
         }
