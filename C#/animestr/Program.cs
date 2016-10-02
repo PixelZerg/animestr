@@ -21,7 +21,7 @@ namespace animestr
             //Console.WriteLine(string.Join(Environment.NewLine + Environment.NewLine, new Sources.AnimeDao().GetSearchResults("moo")));
             Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
             Console.ReadLine();
-            new Display().Show();
+            //new Display().Show();
             //TODO!: split the Dislay class into multiple ...View classes. E.g MainView will have the searching, etc. AnimeView show AnimeData, EpisodeView will show episodes, etc... 
         }
     }
