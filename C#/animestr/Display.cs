@@ -53,7 +53,7 @@ namespace animestr
                     }
                     return;
                 }
-                else if (k.Key == ConsoleKey.LeftArrow || k.KeyChar == '>')
+                else if (k.Key == ConsoleKey.D || k.KeyChar == '>' || k.Key == ConsoleKey.L || k.Key == ConsoleKey.RightArrow)
                 {
                     Utils.ClearConsole();
 
@@ -72,6 +72,9 @@ namespace animestr
             }
             else
             {
+                #if DEBUG
+                Console.WriteLine("Entered command: "+k.Key);
+                #endif
                 InvalidCommand();
             }
         }
@@ -89,8 +92,11 @@ namespace animestr
         {
             Console.WriteLine("HELP:");
             Console.WriteLine("Search for anime by starting your command with '/' or '.'");
-            Console.WriteLine("If you are looking at a list, you can SELECT an item by entering the item's index in the list.");
-            Console.WriteLine("You can also use the arrow keys or '>' and '<' to change pages");
+            Console.WriteLine();
+            Console.WriteLine("List Interaction:");
+            Console.WriteLine("SELECT an item by entering the item's index (no) in the list.");
+            Console.WriteLine("Change pages using 'a' and 'd' or '>' and '<' or 'h' and 'l' or the arrow keys (arrow keys might not work on some terminals)");
+            Console.WriteLine("Switch to a specific page by using p{pageNo}");
         }
 
         private void ShowRecomendations()

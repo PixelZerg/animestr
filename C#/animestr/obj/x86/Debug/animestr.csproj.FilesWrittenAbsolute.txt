@@ -8,3 +8,9 @@
 /home/pixelzerg/Desktop/git/animestr/C#/animestr/bin/Debug/animestr.exe
 /home/pixelzerg/Desktop/git/animestr/C#/animestr/obj/x86/Debug/animestr.exe
 /home/pixelzerg/Desktop/git/animestr/C#/animestr/obj/x86/Debug/animestr.exe.mdb
+/home/pixelzerg/git/animestr/C#/animestr/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/pixelzerg/git/animestr/C#/animestr/obj/x86/Debug/animestr.exe
+/home/pixelzerg/git/animestr/C#/animestr/obj/x86/Debug/animestr.exe.mdb
+/home/pixelzerg/git/animestr/C#/animestr/bin/Debug/CsQuery.dll
+/home/pixelzerg/git/animestr/C#/animestr/bin/Debug/animestr.exe.mdb
+/home/pixelzerg/git/animestr/C#/animestr/bin/Debug/animestr.exe
