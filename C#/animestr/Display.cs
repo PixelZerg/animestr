@@ -13,7 +13,6 @@ namespace animestr
         //set to null when not in use so invalid commands can be handled properly
         private ConsoleList clist = null;
         private List<AnimeEntry> curEntryList = null;
-        private AnimeData curAnime = null;
 
         public Display()
         {
@@ -47,11 +46,12 @@ namespace animestr
                     {
                         int selNo = Int32.Parse(k.KeyChar + Console.ReadLine());
                         if(selNo<=clist.items.Count&&selNo>0){
-                            //TODO: not ALWAYS selecting an anime here!!
                             //select an anime
-                            curAnime = source.GetData(curEntryList[selNo-1]);
-                            clist = null;
-                            curEntryList = null;
+                            new System.Threading.Thread(() =>
+                                {
+                                    this.DisplaySplash("Loading anime...");
+                                }).Start();
+                            new AnimeDataView(this, source.GetData(curEntryList[selNo-1])).Show();
                             this.Refresh();
                         }else{
                             throw new IndexOutOfRangeException();
@@ -137,12 +137,7 @@ namespace animestr
         }
 
         public void Refresh(){
-            if(curAnime != null){
-                Utils.ClearConsole();
-                //TODO: do stuff
-                ReadCommand();
-            }
-            else if (clist != null)
+            if (clist != null)
             {
                 Utils.ClearConsole();
                 clist.PrintList();
