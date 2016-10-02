@@ -56,8 +56,11 @@ namespace animestr
                 else if (k.Key == ConsoleKey.D || k.KeyChar == '>' || k.Key == ConsoleKey.L || k.Key == ConsoleKey.RightArrow)
                 {
                     Utils.ClearConsole();
-
-                    clist.PrintList(++clist.curPageNo);
+                    if (clist.curPageNo + 1 <= clist.pageCount)
+                    {
+                        clist.curPageNo++;
+                    }
+                    clist.PrintList(clist.curPageNo);
                     ReadCommand();
                     //TODO: more work here
                     return;
@@ -66,7 +69,12 @@ namespace animestr
                 {
                     Utils.ClearConsole();
 
-                    clist.PrintList(--clist.curPageNo);
+                    if (clist.curPageNo - 1 > 0)
+                    {
+                        clist.curPageNo--;
+                    }
+
+                    clist.PrintList(clist.curPageNo);
                     ReadCommand();
                     //TODO: more work here
                     return;
