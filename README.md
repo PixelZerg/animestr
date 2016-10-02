@@ -25,5 +25,5 @@ I am coding this program with speed and efficiency in mind. Regex is forbidden -
  - [x] [h]elp
  - [x] Page switching with keys
  - [x] Refreshing
- - [  ] search
- - [  ] item interaction
+ - [ ] search
+ - [ ] item interaction
