@@ -76,14 +76,16 @@ namespace animestr
                 Console.ResetColor();
                 lines++;
             }
-//            if (data.info.alts != null)
-//            {
-//                Console.ForegroundColor = ConsoleColor.DarkYellow;
-//                string s = "Alternate titles: " + string.Join(", ", data.info.alts);
-//                Console.WriteLine(s);
-//                lines += (int)Math.Ceiling(s.Length / (double)Console.WindowWidth);
-//            }
-            //TODO: fix this ^^. I suspect it is not working because of Japanese characters.
+            if (data.info.alts != null)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                string s = "Alternate titles: " + string.Join(", ", data.info.alts);
+                Console.WriteLine(s);
+                int slength = new System.Globalization.StringInfo(s).LengthInTextElements;
+                lines += (int)Math.Ceiling(slength / (double)Console.WindowWidth);
+                //TODO:NB: Still cannot fix long JP characters like ー counting issues
+                //TODO: make settings to turn off JP characters.
+            }
             if(data.info.genres!= null){
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 string s = "Genres: "+string.Join(", ", data.info.genres);

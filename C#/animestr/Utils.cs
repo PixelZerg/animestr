@@ -241,6 +241,12 @@ namespace animestr
         }
         #endregion
         //from https://github.com/PixelZerg/LibPZ/
+
+        public static Int32 CountInstances(string orig, string find)
+        {
+            var s2 = orig.Replace(find,"");
+            return (orig.Length - s2.Length) / find.Length;
+        }
     }
 }
 
