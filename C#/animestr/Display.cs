@@ -120,6 +120,20 @@ namespace animestr
                 ShowHelp();
                 ReadCommand();
             }
+            else if (k.Key == ConsoleKey.R)
+            {
+                if (clist != null)
+                {
+                    Utils.ClearConsole();
+                    clist.PrintList();
+                    ReadCommand();
+                }
+                else
+                {
+                    InvalidCommand("Could not refresh!");
+                }
+                return;
+            }
             else
             {
                 #if DEBUG
@@ -141,7 +155,9 @@ namespace animestr
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("HELP:");
-            Console.WriteLine("Search for anime by starting your command with '/'");
+            Console.WriteLine("Access help by 'h' or '?'");
+            Console.WriteLine("Search for anime by entering /{query}");
+            Console.WriteLine("Use 'r' to refresh the display");
             Console.WriteLine();
             Console.WriteLine("List Interaction:");
             Console.WriteLine("SELECT an item by entering the item's index (no) in the list.");

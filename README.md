@@ -15,3 +15,15 @@ I am coding this program with speed and efficiency in mind. Regex is forbidden -
  - [x] Popularity
  - [x] Description
  - [x] Search
+- AnimeDao Parsing
+ - [x] GetData
+ - [x] GetRecommendations
+ - [x] GetSearchResults
+ - [x] GetMRLs
+- User Interface
+ - [x] Page switching with 'p' command
+ - [x] [h]elp
+ - [x] Page switching with keys
+ - [x] Refreshing
+ - [  ] search
+ - [  ] item interaction
