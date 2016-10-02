@@ -79,6 +79,27 @@ namespace animestr
                     //TODO: more work here
                     return;
                 }
+                else if(k.Key == ConsoleKey.P){
+                    Utils.ClearConsole();
+
+                    clist.PrintList();
+
+                    Console.BackgroundColor = ConsoleColor.Blue;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("Page no:");
+                    Console.ResetColor();
+                    Console.Write(" ");
+                    try
+                    {
+                        int no = Int32.Parse(Console.ReadLine());
+                        //TODO: do stuff here
+                    }
+                    catch
+                    {
+                        InvalidCommand("Please enter an integer within the range 1-"+clist.pageCount);
+                    }
+                    return;
+                }
             }
 
             if (k.Key == ConsoleKey.H || k.KeyChar == '?')
@@ -98,8 +119,7 @@ namespace animestr
 
         private void InvalidCommand(string msg = "Invalid command!")
         {
-            Console.BackgroundColor = ConsoleColor.Red;
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(msg+" Do ? or h for help");
             Console.ResetColor();
             ReadCommand();
