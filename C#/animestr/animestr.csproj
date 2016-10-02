@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="AnimeData.cs" />
     <Compile Include="AnimeInfo.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="Consts.cs" />
     <Compile Include="Display.cs" />
     <Compile Include="EpisodeData.cs" />
@@ -57,7 +58,5 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
