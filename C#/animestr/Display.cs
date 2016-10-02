@@ -63,7 +63,7 @@ namespace animestr
                     }
                     return;
                 }
-                else if (k.Key == ConsoleKey.D || k.KeyChar == '>' || k.Key == ConsoleKey.RightArrow)
+                else if ( k.KeyChar == '>' || k.Key == ConsoleKey.RightArrow)
                 {
                     Utils.ClearConsole();
                     if (clist.curPageNo + 1 <= clist.pageCount)
@@ -74,7 +74,7 @@ namespace animestr
                     ReadCommand();
                     return;
                 }
-                else if (k.Key == ConsoleKey.A || k.KeyChar == '<' || k.Key == ConsoleKey.LeftArrow)
+                else if (k.KeyChar == '<' || k.Key == ConsoleKey.LeftArrow)
                 {
                     Utils.ClearConsole();
 
@@ -167,7 +167,7 @@ namespace animestr
             Console.WriteLine();
             Console.WriteLine("List Interaction:");
             Console.WriteLine("SELECT an item by entering the item's index (no) in the list.");
-            Console.WriteLine("Change pages using 'a' and 'd' or '>' and '<' or the arrow keys (arrow keys might not work on some terminals)");
+            Console.WriteLine("Change pages using '>' and '<' or the arrow keys (arrow keys might not work on some terminals)");
             Console.WriteLine("Switch to a specific page by using p{pageNo}");
             Console.ResetColor();
         }
