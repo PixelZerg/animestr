@@ -51,7 +51,7 @@ namespace animestr
 					Console.ForegroundColor = ConsoleColor.Yellow;
 				}
 				if (i < items.Count) {
-					Console.WriteLine ((i < 9 ? " " : "") + (i < 99 ? " " : "") + (i < 999 ? " " : "") + (i + 1)+ " |  " + (items[i].Length>=Console.WindowWidth-9-i.ToString().Length ? items[i].Substring(0,Console.WindowWidth-9-i.ToString().Length)+"...": items[i]));
+					Console.WriteLine ((i < 9 ? " " : "") + (i < 99 ? " " : "") + (i < 999 ? " " : "") + (i + 1)+ " |  " + (items[i].Length>=Console.WindowWidth-9-i.ToString().Length ? items[i].Substring(0,Console.WindowWidth-11-i.ToString().Length)+"...": items[i]));
 				} else {
                     Console.WriteLine();//padding
 				}

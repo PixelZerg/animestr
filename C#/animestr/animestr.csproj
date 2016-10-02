@@ -53,6 +53,7 @@
     <Compile Include="Utils.cs" />
     <Compile Include="ConsoleList.cs" />
     <Compile Include="Views\AnimeDataView.cs" />
+    <Compile Include="Views\ConfigView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

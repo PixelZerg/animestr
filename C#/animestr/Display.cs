@@ -122,6 +122,10 @@ namespace animestr
                 ShowHelp();
                 ReadCommand();
             }
+            else if (k.Key == ConsoleKey.S)
+            {
+                new Views.ConfigView().Show();
+            }
             else if (k.Key == ConsoleKey.R)
             {
                 Refresh();
@@ -129,9 +133,9 @@ namespace animestr
             }
             else
             {
-                #if DEBUG
-                Console.WriteLine("Entered command: "+k.Key);
-                #endif
+#if DEBUG
+                Console.WriteLine("Entered command: " + k.Key);
+#endif
                 InvalidCommand();
             }
         }
@@ -152,7 +156,7 @@ namespace animestr
         private void InvalidCommand(string msg = "Invalid command!")
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(msg+" Do ? or h for help. Try again.");
+            Console.WriteLine(msg+" Do [h]elp or [s]ettings. Try again.");
             Console.ResetColor();
             ReadCommand();
         }
@@ -183,7 +187,7 @@ namespace animestr
             recommendations = source.GetRecommendations();
             splashDone = true;
 
-            clist = new ConsoleList("Recommendations","Enter /{query} to search or [h]elp");
+            clist = new ConsoleList("Recommendations","Enter /{query} to search, [s]ettings to edit the config or [h]elp for more info");
             foreach (AnimeEntry recommendation in recommendations)
             {
                 clist.items.Add(recommendation.title);

@@ -247,6 +247,35 @@ namespace animestr
             var s2 = orig.Replace(find,"");
             return (orig.Length - s2.Length) / find.Length;
         }
+
+        public static string PadString(string s, int length)
+        {
+            string ret = s;
+            if (s.Length+1 < length)
+            {
+                for (int i = 0; i < length - s.Length; i++)
+                {
+                    ret += ' ';
+                }
+            }
+            else
+            {
+                ret = s.Substring(0, s.Length - 6);
+                ret += "...";
+            }
+            return ret;
+        }
+
+        public static string LimitString(string s, int length)
+        {
+            string ret = s;
+            if (s.Length > length)
+            {
+                ret = s.Substring(0, s.Length - 6);
+                ret += "...";
+            }
+            return ret;
+        }
     }
 }
 
