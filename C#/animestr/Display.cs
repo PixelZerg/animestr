@@ -13,6 +13,7 @@ namespace animestr
         //set to null when not in use so invalid commands can be handled properly
         private ConsoleList clist = null;
         private List<AnimeEntry> curEntryList = null;
+        private AnimeData curAnime = null;
 
         public Display()
         {
@@ -46,7 +47,12 @@ namespace animestr
                     {
                         int selNo = Int32.Parse(k.KeyChar + Console.ReadLine());
                         if(selNo<=clist.items.Count&&selNo>0){
-                            //TODO: do stuff here
+                            //TODO: not ALWAYS selecting an anime here!!
+                            //select an anime
+                            curAnime = source.GetData(curEntryList[selNo-1]);
+                            clist = null;
+                            curEntryList = null;
+                            this.Refresh();
                         }else{
                             throw new IndexOutOfRangeException();
                         }
@@ -66,7 +72,6 @@ namespace animestr
                     }
                     clist.PrintList(clist.curPageNo);
                     ReadCommand();
-                    //TODO: more work here
                     return;
                 }
                 else if (k.Key == ConsoleKey.A || k.KeyChar == '<' || k.Key == ConsoleKey.LeftArrow)
@@ -80,7 +85,6 @@ namespace animestr
 
                     clist.PrintList(clist.curPageNo);
                     ReadCommand();
-                    //TODO: more work here
                     return;
                 }
                 else if(k.Key == ConsoleKey.P){
@@ -103,8 +107,6 @@ namespace animestr
                         }else{
                             throw new IndexOutOfRangeException();
                         }
-                        //TODO: do stuff here
-
                     }
                     catch
                     {
@@ -122,16 +124,7 @@ namespace animestr
             }
             else if (k.Key == ConsoleKey.R)
             {
-                if (clist != null)
-                {
-                    Utils.ClearConsole();
-                    clist.PrintList();
-                    ReadCommand();
-                }
-                else
-                {
-                    InvalidCommand("Could not refresh!");
-                }
+                Refresh();
                 return;
             }
             else
@@ -140,6 +133,24 @@ namespace animestr
                 Console.WriteLine("Entered command: "+k.Key);
                 #endif
                 InvalidCommand();
+            }
+        }
+
+        public void Refresh(){
+            if(curAnime != null){
+                Utils.ClearConsole();
+                //TODO: do stuff
+                ReadCommand();
+            }
+            else if (clist != null)
+            {
+                Utils.ClearConsole();
+                clist.PrintList();
+                ReadCommand();
+            }
+            else
+            {
+                InvalidCommand("Could not refresh!");
             }
         }
 
@@ -183,7 +194,7 @@ namespace animestr
                 clist.items.Add(recommendation.title);
             }
             curEntryList = recommendations;
-            clist.PrintList();
+            this.Refresh();
 
             ReadCommand();
         }

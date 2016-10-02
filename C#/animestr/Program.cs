@@ -20,6 +20,7 @@ namespace animestr
             //Console.WriteLine(string.Join(Environment.NewLine+Environment.NewLine,new Sources.AnimeDao().GetRecommendations()));
             //Console.WriteLine(string.Join(Environment.NewLine + Environment.NewLine, new Sources.AnimeDao().GetSearchResults("moo")));
             new Display().Show();
+            //TODO!: split the Dislay class into multiple ...View classes. E.g MainView will have the searching, etc. AnimeView show AnimeData, EpisodeView will show episodes, etc... 
         }
     }
 }
