@@ -14,7 +14,7 @@ namespace animestr.Views
         {
             Config.Load();
             clist = new ConsoleList("Config", "Select items to change their values, or go [b]ack");
-            clist.items.Add(Utils.PadString("Display non-latin chars ", Console.WindowWidth/2) + " : " + Config.printNonLatinCharacters.ToString());
+            clist.items.Add(Utils.PadString("Show titles with unicode chars (can mess up display) ", (Console.WindowWidth/4)*3) + " : " + Config.displayUnicodeTitles.ToString());
         }
 
         public void Show()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace animestr
 {
@@ -275,6 +276,11 @@ namespace animestr
                 ret += "...";
             }
             return ret;
+        }
+
+        public static bool ContainsUnicode(string input)
+        {
+            return input.Any(c => c > 255);
         }
     }
 }

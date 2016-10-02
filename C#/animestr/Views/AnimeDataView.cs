@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace animestr
 {
@@ -35,21 +36,21 @@ namespace animestr
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("Score: ");
                 Console.Write(data.info.score);
-                for (int i = 0; i < (Console.WindowWidth / 3) - 7 - data.info.score.Length; i++)
+                for (int i = 0; i < ((Console.WindowWidth-1) / 3) - 7 - data.info.score.Length; i++)
                 {
                     Console.Write(' ');
                 }
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("| Rank: ");
                 Console.Write(data.info.rank);
-                for (int i = 0; i < (Console.WindowWidth / 3) - 8 - data.info.rank.Length; i++)
+                for (int i = 0; i < ((Console.WindowWidth-1) / 3) - 8 - data.info.rank.Length; i++)
                 {
                     Console.Write(' ');
                 }
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.Write("| Popularity: ");
                 Console.Write(data.info.popularity);
-                for (int i = 0; i < (Console.WindowWidth / 3) - 14 - data.info.rank.Length; i++)
+                for (int i = 0; i < ((Console.WindowWidth-1) / 3) - 14 - data.info.rank.Length; i++)
                 {
                     Console.Write(' ');
                 }
@@ -79,10 +80,10 @@ namespace animestr
             if (data.info.alts != null)
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
-                string s = "Alternate titles: " + string.Join(", ", data.info.alts);
+                string s = "Alternate titles: " + string.Join(", ", data.info.alts.Where(x => !Utils.ContainsUnicode(x) || Config.displayUnicodeTitles));
                 Console.WriteLine(s);
                 int slength = new System.Globalization.StringInfo(s).LengthInTextElements;
-                lines += (int)Math.Ceiling(slength / (double)Console.WindowWidth);
+                lines += (int)Math.Ceiling(slength / (double)(Console.WindowWidth-1));
                 //TODO:NB: Still cannot fix long JP characters like ー counting issues
                 //TODO: make settings to turn off JP characters.
             }
@@ -90,12 +91,12 @@ namespace animestr
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 string s = "Genres: "+string.Join(", ", data.info.genres);
                 Console.WriteLine(s);
-                lines+=(int)Math.Ceiling(s.Length/(double)Console.WindowWidth);
+                lines+=(int)Math.Ceiling(s.Length/(double)(Console.WindowWidth-1));
             }
             if(data.info.description!=null){
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Description: ");
-                string extract = (data.info.description.Length>Console.WindowWidth-3)?data.info.description.Split('\n')[0].Substring(0,Console.WindowWidth-3):data.info.description;
+                string extract = (data.info.description.Length>Console.WindowWidth-4)?data.info.description.Split('\n')[0].Substring(0,Console.WindowWidth-4):data.info.description;
                 extract = (extract.EndsWith(".") ? extract + ".." : extract + "...");
                 Console.WriteLine(extract);
                 Console.ForegroundColor = ConsoleColor.DarkGreen;

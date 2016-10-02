@@ -9,21 +9,21 @@ namespace animestr
 {
     public class Config
     {
-        public static bool printNonLatinCharacters = false;
+        public static bool displayUnicodeTitles = false;
 
         private static FileInfo file = new FileInfo(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "/.animestr");
 
         private static string GetDataString()
         {
             string ret = "";
-            ret += (printNonLatinCharacters ? 1 : 0) + "!";
+            ret += (displayUnicodeTitles ? 1 : 0) + "!";
             return ret;
         }
 
         private static void LoadDataString(string s)
         {
             string[] data = s.Split('!');
-            printNonLatinCharacters = data[0].StartsWith("1");
+            displayUnicodeTitles = data[0].StartsWith("1");
         }
 
         public static void Load()
