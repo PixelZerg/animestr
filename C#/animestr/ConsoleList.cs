@@ -10,6 +10,19 @@ namespace animestr
 
         public int curPageNo = 1;
 
+        public int pageCount{
+            get
+            {
+                return (items.Count + this.pageSize - 1) / this.pageSize; 
+            }
+        }
+
+        private int pageSize{
+            get{
+                return (Console.WindowHeight - 2 - 3);
+            }
+        }
+
 		public ConsoleList ()
 		{
 		}
@@ -26,11 +39,10 @@ namespace animestr
 		/// <param name="offtop">Offtop.</param>
 		/// <param name="offbottom">Offbottom.</param>
 		/// <param name="pageNo">Page no.</param>
-		public void PrintList(int offtop, int offbottom, int pageNo)
+		private void PrintList(int offtop, int offbottom, int pageNo)
 		{	
 			offbottom += 1; //padding
-
-			int pageSize = (Console.WindowHeight - offtop - offbottom);//size = amount of elements 
+             
 			for (int i = pageSize * (pageNo - 1); i < ((pageSize * (pageNo - 1))+pageSize); i++) 
 			{
 				if (i % 2 == 0) 
@@ -46,16 +58,20 @@ namespace animestr
 			}
 		}
 
-		/// <summary>
-		/// Prints the list. NB: pageNo is 1-based. It starts with a 1 not a 0!
-		/// </summary>
-		public void PrintList(int pageNo)
-		{
-            PrintHeader(pageNo);
-            Console.ResetColor();
-            Utils.PrintBreak('-');
-            PrintList(2, 0, pageNo);
-		}
+//	
+//		/// Prints the list. NB: pageNo is 1-based. It starts with a 1 not a 0!
+//		/// </summary>
+//		public void PrintList(int pageNo)
+//		{
+//            PrintHeader(pageNo);
+//            Console.ResetColor();
+//            Utils.PrintBreak('-');
+//            PrintList(2, 0, pageNo);
+//		}
+
+        public void PrintList(int pageNo){
+            PrintList("", pageNo);
+        }
 
 		/// <summary>
 		/// Prints the list. NB: pageNo is 1-based. It starts with a 1 not a 0!
@@ -75,7 +91,7 @@ namespace animestr
 		/// </summary>
         public void PrintList()
         {
-            PrintList(this.curPageNo);
+            PrintList("",this.curPageNo);
         }
         /// <summary>
 		/// Prints the list at the current page number
@@ -95,7 +111,7 @@ namespace animestr
         private void PrintHeader(int pageNo)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("  no |  "+this.title + " - page " + pageNo + "/" + items.Count / (Console.WindowHeight - 3));
+            Console.WriteLine("  no |  "+this.title + " - page " + pageNo + "/" + this.pageCount);
         }
 
         /// <summary>

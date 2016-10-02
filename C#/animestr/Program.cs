@@ -19,7 +19,6 @@ namespace animestr
             //Console.WriteLine(new EpisodeData(3).LoadFromMAL(@"https://myanimelist.net/anime/11111/Another").synopsis);
             //Console.WriteLine(string.Join(Environment.NewLine+Environment.NewLine,new Sources.AnimeDao().GetRecommendations()));
             //Console.WriteLine(string.Join(Environment.NewLine + Environment.NewLine, new Sources.AnimeDao().GetSearchResults("moo")));
-            Console.ReadLine();
             new Display().Show();
         }
     }

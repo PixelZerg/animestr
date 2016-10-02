@@ -62,6 +62,15 @@ namespace animestr
                     //TODO: more work here
                     return;
                 }
+                else if (k.Key == ConsoleKey.A || k.KeyChar == '<' || k.Key == ConsoleKey.H || k.Key == ConsoleKey.LeftArrow)
+                {
+                    Utils.ClearConsole();
+
+                    clist.PrintList(--clist.curPageNo);
+                    ReadCommand();
+                    //TODO: more work here
+                    return;
+                }
             }
 
             if (k.Key == ConsoleKey.H || k.KeyChar == '?')
