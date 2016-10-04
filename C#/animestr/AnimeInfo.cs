@@ -8,8 +8,8 @@ namespace animestr
     {
         public string title = null;
         public string description = null;
-        public List<string> alts = new List<string>();
-        public List<string> genres = new List<string>();
+        public List<string> alts = null;
+        public List<string> genres = null;
 
         //MAL
         public string score = null;

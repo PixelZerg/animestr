@@ -20,9 +20,9 @@ namespace animestr
         }
 
         public void ShowData(){                  
-            data.info.LoadFromMAL();
+            //data.info.LoadFromMAL();
             display.splashDone = true;
-
+            //Console.ReadKey();
             Utils.ClearConsole();
             int lines = 0;
             if (data.info.title != null)
@@ -96,13 +96,18 @@ namespace animestr
             if(data.info.description!=null){
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Description: ");
-                string extract = (data.info.description.Length>Console.WindowWidth-4)?data.info.description.Split('\n')[0].Substring(0,Console.WindowWidth-4):data.info.description;
+                string extract = (data.info.description.Split('\n')[0].Length>Console.WindowWidth-4)?data.info.description.Split('\n')[0].Substring(0,Console.WindowWidth-4):data.info.description.Split('\n')[0];
                 extract = (extract.EndsWith(".") ? extract + ".." : extract + "...");
                 Console.WriteLine(extract);
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("View full description with 'd'");
                 lines += 3;
             }
+
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("Load information from MAL with 'i'");
+            lines += 1;
+
             Console.ResetColor();
             lines += 1;
             for(int i = 0; i < Console.WindowHeight-lines;i++){

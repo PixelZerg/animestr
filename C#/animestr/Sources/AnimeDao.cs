@@ -16,12 +16,36 @@ namespace animestr.Sources
             ret.entry = entry;
             ret.info = new AnimeInfo();
             ret.info.title = ret.entry.title;
+
             //TODO: do more info parsing
 
             string page = "";
             using (WebClient wc = new WebClient())
             {
                 page = wc.DownloadString(entry.url);
+            }
+
+            //get genres
+            foreach (string sec in Parsing.GetSections(page,"<a ","</a>","animeinfo_label","genre"))
+            {
+                try{
+                    ret.info.genres.Add(Parsing.GetBetween(Parsing.GetSection(sec,"<span ","</span>"),"class=\"label animedao-color\">","</span>").Trim());
+                } catch{}
+
+            }
+
+            //get desc
+
+            string[] infoSecSpl = Parsing.GetSection(page,"col-lg-9\">","</div>","Alternative","Description").Split(new string[]{"br"},StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < infoSecSpl.Length; i++)
+            {
+                if (infoSecSpl[i].Contains("Description"))
+                {
+                    try{
+                        ret.info.description = Parsing.Format(Parsing.GetBetween(infoSecSpl[i + 1],">","<")).Trim();
+                    }catch{
+                    }
+                }
             }
 
             List<EpisodeData> eps = new List<EpisodeData>();
