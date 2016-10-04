@@ -27,11 +27,30 @@ namespace animestr
         public void ReadCommand()
         {
             Console.ForegroundColor = Console.BackgroundColor;
-            ConsoleKeyInfo k = Console.ReadKey();
+            DoCommand(Console.ReadKey());
+        }
 
+        public void SelectAnime(int index){
+            if (index <= clist.items.Count && index > 0)
+            {
+                //select an anime
+                new System.Threading.Thread(() =>
+                    {
+                        this.DisplaySplash("Loading anime...");
+                    }).Start();
+                new AnimeDataView(this, source.GetData(curEntryList[index - 1])).Show();
+                this.Refresh();
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
+        }
+
+        public void DoCommand(ConsoleKeyInfo k){
             if (clist != null) //selecting something in the clist
             {
-                if (Char.IsNumber(k.KeyChar))
+                if (k.Key == ConsoleKey.Spacebar)
                 {
                     Utils.ClearConsole();
 
@@ -41,27 +60,68 @@ namespace animestr
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.Write("Select:");
                     Console.ResetColor();
-                    Console.Write(" " + k.KeyChar);
+                    Console.Write(" ");
                     try
                     {
-                        int selNo = Int32.Parse(k.KeyChar + Console.ReadLine());
-                        if(selNo<=clist.items.Count&&selNo>0){
-                            //select an anime
-                            new System.Threading.Thread(() =>
-                                {
-                                    this.DisplaySplash("Loading anime...");
-                                }).Start();
-                            new AnimeDataView(this, source.GetData(curEntryList[selNo-1])).Show();
-                            this.Refresh();
-                        }else{
-                            throw new IndexOutOfRangeException();
-                        }
+                        this.SelectAnime(Int32.Parse(Console.ReadLine()));
                     }
                     catch
                     {
-                        InvalidCommand("Please enter an integer within the range 1-"+clist.items.Count+"!");
+                        InvalidCommand("Please enter an integer within the range 1-" + clist.items.Count + "!");
                     }
                     return;
+                }
+                else if (k.Key == ConsoleKey.DownArrow)
+                {
+                    if (clist.curSel < (clist.curPageNo - 1) * clist.pageSize || clist.curSel >= (clist.curPageNo) * clist.pageSize)
+                    {
+                        clist.curSel = (clist.curPageNo - 1) * clist.pageSize;   
+                    }
+                    else
+                    {
+                        clist.curSel += (clist.curSel + 1 >= 0 && clist.curSel + 1 < clist.items.Count) ? 1 : 0;
+                    }
+                    if (clist.curSel >= clist.curPageNo * clist.pageSize)
+                    {
+                        clist.curPageNo++;   
+                    }
+                    Utils.ClearConsole();
+                    clist.PrintList();
+                    Console.BackgroundColor = ConsoleColor.Blue;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("Select:");
+                    Console.ResetColor();
+                    Console.Write(" " + (clist.curSel + 1));
+                    ReadCommand();
+                    return;
+                }
+                else if (k.Key == ConsoleKey.UpArrow)
+                {
+                    if (clist.curSel < (clist.curPageNo - 1) * clist.pageSize || clist.curSel >= (clist.curPageNo) * clist.pageSize)
+                    {
+                        clist.curSel = ((clist.curPageNo) * clist.pageSize) - 1;   
+                    }
+                    else
+                    {
+                        clist.curSel -= (clist.curSel - 1 >= 0) ? 1 : 0;
+                    }
+                    if (clist.curSel < (clist.curPageNo - 1) * clist.pageSize)
+                    {
+                        clist.curPageNo--;   
+                    }
+                    Utils.ClearConsole();
+                    clist.PrintList();
+                    Console.BackgroundColor = ConsoleColor.Blue;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("Select:");
+                    Console.ResetColor();
+                    Console.Write(" " + (clist.curSel + 1));
+                    ReadCommand();
+                    return;
+                }
+                else if (k.Key == ConsoleKey.Enter)
+                {
+                    this.SelectAnime(clist.curSel + 1);   
                 }
                 else if ( k.KeyChar == '>' || k.Key == ConsoleKey.RightArrow)
                 {
@@ -133,9 +193,9 @@ namespace animestr
             }
             else
             {
-#if DEBUG
+                #if DEBUG
                 Console.WriteLine("Entered command: " + k.Key);
-#endif
+                #endif
                 InvalidCommand();
             }
         }
@@ -153,10 +213,10 @@ namespace animestr
             }
         }
 
-        private void InvalidCommand(string msg = "Invalid command!")
+        private void InvalidCommand(string msg = "Invalid command! Do [h]elp or [s]ettings.")
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(msg+" Do [h]elp or [s]ettings. Try again.");
+            Console.WriteLine(msg+" Try again.");
             Console.ResetColor();
             ReadCommand();
         }
@@ -170,7 +230,8 @@ namespace animestr
             Console.WriteLine("Use 'r' to refresh the display");
             Console.WriteLine();
             Console.WriteLine("List Interaction:");
-            Console.WriteLine("SELECT an item by entering the item's index (no) in the list.");
+            Console.WriteLine("SELECT an item by using the arrow keys and enter");
+            Console.WriteLine("OR by entering (SPACE){item index}.");
             Console.WriteLine("Change pages using '>' and '<' or the arrow keys (arrow keys might not work on some terminals)");
             Console.WriteLine("Switch to a specific page by using p{pageNo}");
             Console.ResetColor();

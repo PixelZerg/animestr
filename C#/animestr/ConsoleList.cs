@@ -9,6 +9,11 @@ namespace animestr
 		public string title = "list";
         public string desc = "";
 
+        public int curSel= -0;
+
+        /// <summary>
+        /// The current page no. Non-Zero based
+        /// </summary>
         public int curPageNo = 1;
 
         public int pageCount{
@@ -18,7 +23,7 @@ namespace animestr
             }
         }
 
-        private int pageSize{
+        public int pageSize{
             get{
                 return (Console.WindowHeight - 2 - 3);
             }
@@ -46,15 +51,31 @@ namespace animestr
              
 			for (int i = pageSize * (pageNo - 1); i < ((pageSize * (pageNo - 1))+pageSize); i++) 
 			{
+                if(i == curSel){
+                    Console.BackgroundColor = ConsoleColor.Cyan;
+                }
 				if (i % 2 == 0) 
 				{
 					Console.ForegroundColor = ConsoleColor.Yellow;
 				}
 				if (i < items.Count) {
-					Console.WriteLine ((i < 9 ? " " : "") + (i < 99 ? " " : "") + (i < 999 ? " " : "") + (i + 1)+ " |  " + (items[i].Length>=Console.WindowWidth-9-i.ToString().Length ? items[i].Substring(0,Console.WindowWidth-11-i.ToString().Length)+"...": items[i]));
-				} else {
+                    string s = (i < 9 ? " " : "") + (i < 99 ? " " : "") + (i < 999 ? " " : "") + (i + 1) + " |  " + (items[i].Length >= Console.WindowWidth - 9 - i.ToString().Length ? items[i].Substring(0, Console.WindowWidth - 11 - i.ToString().Length) + "..." : items[i]);
+                    Console.Write(s);
+                    if (i == curSel)//minor optimisation
+                    {
+                        for (int j = 0; j < Console.WindowWidth - s.Length; j++)
+                        {
+                            Console.Write(' ');//padding   
+                        }
+                    }
+                    Console.ResetColor();
+                    if(i != curSel || curSel == this.items.Count-1)//for some reason...?
+                    {
+                        Console.WriteLine();
+                    }
+                } else{
                     Console.WriteLine();//padding
-				}
+                }
                 Console.ResetColor();
 			}
 		}
