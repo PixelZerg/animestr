@@ -14,12 +14,13 @@ namespace animestr.Views
         {
             Config.Load();
             clist = new ConsoleList("Config", "Select items to change their values, or go [b]ack");
-            clist.items.Add(Utils.PadString("Show titles with unicode chars (can mess up display) ", (Console.WindowWidth/4)*3) + " : " + Config.displayUnicodeTitles.ToString());
+            clist.items.Add(Utils.PadString("Show titles with unicode chars (can mess up display) ", (Console.WindowWidth / 4) * 3) + " : " + Config.displayUnicodeTitles.ToString());
         }
 
         public void Show()
         {
             ShowConfig();
+            Console.ReadKey();
         }
 
         public void ShowConfig()

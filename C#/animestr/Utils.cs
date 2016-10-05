@@ -3,27 +3,27 @@ using System.Linq;
 
 namespace animestr
 {
-	public static class Utils
-	{
-		public static void PrintBreak(char symbol)
-		{
-			for (int i = 0; i < Console.WindowWidth-1; i++) 
-			{
-				Console.Write (symbol);
-			}
-			Console.Write (Environment.NewLine);
-		}
+    public static class Utils
+    {
+        public static void PrintBreak(char symbol)
+        {
+            for (int i = 0; i < Console.WindowWidth - 1; i++)
+            {
+                Console.Write(symbol);
+            }
+            Console.Write(Environment.NewLine);
+        }
 
-		public static void ClearConsole()
-		{
-           // Console.ForegroundColor = Console.BackgroundColor;
-           // Console.WriteLine(((char)27)+"c");// = \ec = clear (on some terminals)
-           // Console.ResetColor();
-			for (int i = 0; i < Console.WindowHeight; i++) 
-			{
-				Console.WriteLine ();
-			}
-		}
+        public static void ClearConsole()
+        {
+            // Console.ForegroundColor = Console.BackgroundColor;
+            // Console.WriteLine(((char)27)+"c");// = \ec = clear (on some terminals)
+            // Console.ResetColor();
+            for (int i = 0; i < Console.WindowHeight; i++)
+            {
+                Console.WriteLine();
+            }
+        }
 
         /// <summary>
         /// Performs the ROT13 character rotation.
@@ -63,6 +63,7 @@ namespace animestr
         }
 
         #region seperator
+
         /// <summary>
         /// Print a line to console, made up of the character x. If the line's width is less than the console's width, it will have no left padding.
         /// </summary>
@@ -225,7 +226,7 @@ namespace animestr
         /// <param name="alignment"></param>
         public static void PrintSeperator(string text, char y, char z, SeperatorAlign alignment = SeperatorAlign.Centre)
         {
-            PrintSeperator(text, y, z, z, Console.WindowWidth-1, alignment);
+            PrintSeperator(text, y, z, z, Console.WindowWidth - 1, alignment);
         }
 
         /// <summary>
@@ -240,19 +241,29 @@ namespace animestr
         {
             PrintSeperator(text, y, z1, z2, Console.WindowWidth - 1, alignment);
         }
+
         #endregion
+
         //from https://github.com/PixelZerg/LibPZ/
 
         public static Int32 CountInstances(string orig, string find)
         {
-            var s2 = orig.Replace(find,"");
+            var s2 = orig.Replace(find, "");
             return (orig.Length - s2.Length) / find.Length;
+        }
+
+        public static string MakeValidFileName(string name)
+        {
+            string invalidChars = System.Text.RegularExpressions.Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
+            string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
+
+            return System.Text.RegularExpressions.Regex.Replace(name, invalidRegStr, "_");
         }
 
         public static string PadString(string s, int length)
         {
             string ret = s;
-            if (s.Length+1 < length)
+            if (s.Length + 1 < length)
             {
                 for (int i = 0; i < length - s.Length; i++)
                 {

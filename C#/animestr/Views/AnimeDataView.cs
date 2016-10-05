@@ -10,7 +10,7 @@ namespace animestr
         public Display display = null;
 
         public bool[] itemsDisplayed = new bool[]{ false, false, false, false, false };
-        //p, o, d, i
+        //p, o, d, i, b
 
         public AnimeDataView(Display display, AnimeData data)
         {
@@ -22,6 +22,7 @@ namespace animestr
         public void Show()
         {
             ShowData();
+            this.ReadCommand();
         }
 
         public void ReadCommand()
@@ -41,10 +42,100 @@ namespace animestr
                 this.ShowData();
                 ReadCommand();
             }
+            else if (k.Key == ConsoleKey.D && itemsDisplayed[2])
+            {
+                //show description
+                this.ShowMessage(this.data.entry.title + " - Description", this.data.info.description);
+                this.ShowData();
+                ReadCommand();
+            }
+            else if (k.Key == ConsoleKey.O && itemsDisplayed[1])
+            {
+                this.display.ShowSplash("Opening page...");
+                string file = "";
+                try
+                {
+                    if (data.info.MALPage != null)
+                    {
+                        file = System.IO.Path.GetTempPath() + Utils.MakeValidFileName(data.info.MALUrl);
+                        using (System.IO.FileStream fs = new System.IO.FileStream(file, System.IO.FileMode.Create))
+                        using (System.IO.StreamWriter sw = new System.IO.StreamWriter(fs))
+                        {
+                            sw.WriteLine(data.info.MALPage);
+                        } 
+                    }
+                    else if (data.info.MALUrl != null)
+                    {
+                        file = data.info.MALUrl;
+                    }
+                }
+                catch
+                {
+                }
+
+                if (file != "")
+                {
+                    System.Diagnostics.Process p = new System.Diagnostics.Process();
+                    p.StartInfo = new System.Diagnostics.ProcessStartInfo(file);
+                    p.Start();
+                    p.WaitForInputIdle();
+                    this.display.splashDone = true;
+                    this.ShowData();
+                    this.ReadCommand();
+                }
+                else
+                {
+                    this.display.splashDone = true;
+                    InvalidCommand("Something went wrong!");
+                }
+            }
+            else if (k.Key == ConsoleKey.P && itemsDisplayed[0])
+            {
+                InvalidCommand("Comming soon!");
+            }
+            else if (k.Key == ConsoleKey.R)
+            {
+                Utils.ClearConsole();
+                this.ShowData();
+                ReadCommand();
+            }
+            else if (k.Key == ConsoleKey.Enter && itemsDisplayed[4])
+            {
+                InvalidCommand("Comming soon!");
+            }
+            else if (k.Key == ConsoleKey.B || k.Key == ConsoleKey.Backspace)
+            {
+                //exit the methodcall
+            }
             else
             {
                 InvalidCommand();
             }
+        }
+
+        public void ShowMessage(string title, string message)
+        {
+            Utils.ClearConsole();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Utils.PrintSeperator(title, '-', '|');
+            int lines = 1;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(message);
+            lines += (int)Math.Ceiling(message.Length / (double)(Console.WindowWidth - 1));
+            lines += Utils.CountInstances(message, "\n");
+            Console.WriteLine();
+            lines += 3;
+            if (lines < Console.WindowHeight)
+            {
+                for (int i = 0; i < Console.WindowHeight - lines; i++)
+                {
+                    Console.WriteLine();
+                }
+            }
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("Press any key to go back");
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.ReadKey();
         }
 
         private void InvalidCommand(string msg = "Invalid command!")
@@ -115,7 +206,7 @@ namespace animestr
             if (data.info.MALUrl != null || data.info.MALPage != null)
             {
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine("View myanimelist entry with 'o'");
+                Console.WriteLine("Open myanimelist page with in browser with 'o'");
                 Console.ResetColor();
                 itemsDisplayed[1] = true;
                 lines++;
@@ -164,10 +255,9 @@ namespace animestr
             }
 
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("Go back with 'b' or view episodes with (ENTER)");
+            Console.WriteLine("Go back with 'b' (or BACKSPACE) or view episodes with (ENTER)");
             itemsDisplayed[4] = true;
 
-            this.ReadCommand();
         }
     }
 }
