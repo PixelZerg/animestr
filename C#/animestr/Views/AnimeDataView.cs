@@ -9,7 +9,7 @@ namespace animestr
         public IAnimeSource source = null;
         public Display display = null;
 
-        public AnimeInfo preInfo = null;
+        public bool loadedMAL = false;
 
         public bool[] itemsDisplayed = new bool[]{ false, false, false, false, false };
         //p, o, d, i
@@ -36,18 +36,12 @@ namespace animestr
         {
             if (k.Key == ConsoleKey.I && itemsDisplayed[3])
             {
-                if (preInfo == null)
+                if (!loadedMAL)
                 {
                     this.display.ShowSplash("Loading information...");   
-                    preInfo = this.data.info;
+                    loadedMAL = true;
                     data.info.LoadFromMAL();
                     this.display.splashDone = true;
-                }
-                else
-                {
-                    AnimeInfo swap = this.data.info;
-                    this.data.info = preInfo;//not working because need to do deep copy 
-                    preInfo = swap;
                 }
                 this.ShowData();
                 ReadCommand();
@@ -162,7 +156,7 @@ namespace animestr
             }
 
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("Load/unload information from MAL with 'i'");
+            Console.WriteLine("Load information from MAL with 'i'");
             lines += 1;
             itemsDisplayed[3] = true;
 

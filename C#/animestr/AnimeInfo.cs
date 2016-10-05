@@ -19,7 +19,10 @@ namespace animestr
         public string MALPage = null;
         public string MALUrl = null;
 
-        public AnimeInfo() { }
+        public AnimeInfo()
+        {
+        }
+
         public AnimeInfo(string title)
         {
             this.title = title;
@@ -49,6 +52,21 @@ namespace animestr
                 malUrl = Parsing.GetBetween(new MALParser(searchPage).GetLinkSection(), "href=\"", "\"");
                 return wc.DownloadString(malUrl);
             }
+        }
+
+        public AnimeInfo Clone()
+        {
+            AnimeInfo clone = new AnimeInfo();
+            clone.alts = this.alts;
+            clone.description = this.description;
+            clone.genres = this.genres;
+            clone.MALPage = this.MALPage;
+            clone.MALUrl = this.MALUrl;
+            clone.popularity = this.popularity;
+            clone.rank = this.rank;
+            clone.score = this.score;
+            clone.title = this.title;
+            return clone;
         }
     }
 }
