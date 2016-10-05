@@ -30,14 +30,12 @@ namespace animestr
             DoCommand(Console.ReadKey());
         }
 
-        public void SelectAnime(int index){
+        public void SelectAnime(int index)
+        {
             if (index <= clist.items.Count && index > 0)
             {
                 //select an anime
-                new System.Threading.Thread(() =>
-                    {
-                        this.DisplaySplash("Loading anime...");
-                    }).Start();
+                ShowSplash("Loading anime...");
                 new AnimeDataView(this, source.GetData(curEntryList[index - 1])).Show();
                 this.Refresh();
             }
@@ -47,7 +45,16 @@ namespace animestr
             }
         }
 
-        public void DoCommand(ConsoleKeyInfo k){
+        public void ShowSplash(string s)
+        {
+            new System.Threading.Thread(() =>
+                {
+                    this.DisplaySplash(s);
+                }).Start();
+        }
+
+        public void DoCommand(ConsoleKeyInfo k)
+        {
             if (clist != null) //selecting something in the clist
             {
                 if (k.Key == ConsoleKey.Spacebar)
@@ -123,7 +130,7 @@ namespace animestr
                 {
                     this.SelectAnime(clist.curSel + 1);   
                 }
-                else if ( k.KeyChar == '>' || k.Key == ConsoleKey.RightArrow)
+                else if (k.KeyChar == '>' || k.Key == ConsoleKey.RightArrow)
                 {
                     Utils.ClearConsole();
                     if (clist.curPageNo + 1 <= clist.pageCount)
@@ -147,7 +154,8 @@ namespace animestr
                     ReadCommand();
                     return;
                 }
-                else if(k.Key == ConsoleKey.P){
+                else if (k.Key == ConsoleKey.P)
+                {
                     Utils.ClearConsole();
 
                     clist.PrintList();
@@ -160,17 +168,20 @@ namespace animestr
                     try
                     {
                         int no = Int32.Parse(Console.ReadLine());
-                        if(no <= clist.pageCount&&no>0){
+                        if (no <= clist.pageCount && no > 0)
+                        {
                             clist.curPageNo = no;
                             clist.PrintList();
                             ReadCommand();
-                        }else{
+                        }
+                        else
+                        {
                             throw new IndexOutOfRangeException();
                         }
                     }
                     catch
                     {
-                        InvalidCommand("Please enter an integer within the range 1-"+clist.pageCount+"!");
+                        InvalidCommand("Please enter an integer within the range 1-" + clist.pageCount + "!");
                     }
                     return;
                 }
@@ -200,7 +211,8 @@ namespace animestr
             }
         }
 
-        public void Refresh(){
+        public void Refresh()
+        {
             if (clist != null)
             {
                 Utils.ClearConsole();
@@ -216,7 +228,7 @@ namespace animestr
         private void InvalidCommand(string msg = "Invalid command! Do [h]elp or [s]ettings.")
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(msg+" Try again.");
+            Console.WriteLine(msg + " Try again.");
             Console.ResetColor();
             ReadCommand();
         }
@@ -242,13 +254,13 @@ namespace animestr
             List<AnimeEntry> recommendations = new List<AnimeEntry>();
 
             new System.Threading.Thread(() =>
-            {
-                DisplaySplash("Loading recommendations...");
-            }).Start();
+                {
+                    DisplaySplash("Loading recommendations...");
+                }).Start();
             recommendations = source.GetRecommendations();
             splashDone = true;
 
-            clist = new ConsoleList("Recommendations","Enter /{query} to search, [s]ettings to edit the config or [h]elp for more info");
+            clist = new ConsoleList("Recommendations", "Enter /{query} to search, [s]ettings to edit the config or [h]elp for more info");
             foreach (AnimeEntry recommendation in recommendations)
             {
                 clist.items.Add(recommendation.title);
@@ -260,6 +272,7 @@ namespace animestr
         }
 
         public bool splashDone = false;
+
         public void DisplaySplash(string text, bool resetColour = false)
         {
             splashDone = false;
@@ -356,7 +369,9 @@ namespace animestr
                 {
                     Console.ResetColor();
                 }
-                while (!splashDone) {}
+                while (!splashDone)
+                {
+                }
             }
 
         }
