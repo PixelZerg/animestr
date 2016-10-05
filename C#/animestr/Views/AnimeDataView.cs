@@ -9,8 +9,6 @@ namespace animestr
         public IAnimeSource source = null;
         public Display display = null;
 
-        public bool loadedMAL = false;
-
         public bool[] itemsDisplayed = new bool[]{ false, false, false, false, false };
         //p, o, d, i
 
@@ -36,13 +34,10 @@ namespace animestr
         {
             if (k.Key == ConsoleKey.I && itemsDisplayed[3])
             {
-                if (!loadedMAL)
-                {
-                    this.display.ShowSplash("Loading information...");   
-                    loadedMAL = true;
-                    data.info.LoadFromMAL();
-                    this.display.splashDone = true;
-                }
+                this.display.ShowSplash("Loading information...");   
+                data.info.LoadFromMAL();
+                this.display.splashDone = true;
+                
                 this.ShowData();
                 ReadCommand();
             }
