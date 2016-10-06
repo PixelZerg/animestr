@@ -82,7 +82,7 @@ namespace animestr
                 {
                     if (clist.curSel < (clist.curPageNo - 1) * clist.pageSize || clist.curSel >= (clist.curPageNo) * clist.pageSize)
                     {
-                        clist.curSel = (clist.curPageNo - 1) * clist.pageSize;   
+                        clist.curSel = (clist.curPageNo - 1) * clist.pageSize; 
                     }
                     else
                     {
@@ -107,6 +107,10 @@ namespace animestr
                     if (clist.curSel < (clist.curPageNo - 1) * clist.pageSize || clist.curSel >= (clist.curPageNo) * clist.pageSize)
                     {
                         clist.curSel = ((clist.curPageNo) * clist.pageSize) - 1;   
+                        if (clist.curSel > clist.items.Count - 1)
+                        {
+                            clist.curSel = clist.items.Count - 1;
+                        }  
                     }
                     else
                     {

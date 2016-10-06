@@ -24,26 +24,34 @@ namespace animestr.Sources
             {
                 page = wc.DownloadString(entry.url);
             }
-
+            ret.info.genres = new List<string>();
             //get genres
             foreach (string sec in Parsing.GetSections(page,"<a ","</a>","animeinfo_label","genre"))
             {
-                try{
-                    ret.info.genres.Add(Parsing.GetBetween(Parsing.GetSection(sec,"<span ","</span>"),"class=\"label animedao-color\">","</span>").Trim());
-                } catch{}
+                try
+                {
+                    ret.info.genres.Add(Parsing.GetBetween(Parsing.GetSection(sec, "<span ", "</span>"), "class=\"label animedao-color\">", "</span>").Trim());
+                }
+                catch
+                {
+                }
 
             }
 
             //get desc
 
-            string[] infoSecSpl = Parsing.GetSection(page,"col-lg-9\">","</div>","Alternative","Description").Split(new string[]{"br"},StringSplitOptions.RemoveEmptyEntries);
+            string[] infoSecSpl = Parsing.GetSection(page, "col-lg-9\">", "</div>", "Alternative", "Description").Split(new string[]{ "<br" }, StringSplitOptions.RemoveEmptyEntries);
+            //var infoSecSpl = Parsing.GetBetweens(Parsing.GetSection(page, "col-lg-9\">", "</div>", "Alternative", "Description"), "<b", "<br");
             for (int i = 0; i < infoSecSpl.Length; i++)
             {
                 if (infoSecSpl[i].Contains("Description"))
                 {
-                    try{
-                        ret.info.description = Parsing.Format(Parsing.GetBetween(infoSecSpl[i + 1],">","<")).Trim();
-                    }catch{
+                    try
+                    {
+                        ret.info.description = Parsing.Format(Parsing.GetBetween(infoSecSpl[i + 1], ">", "<")).Trim();
+                    }
+                    catch
+                    {
                     }
                 }
             }
@@ -61,7 +69,9 @@ namespace animestr.Sources
                     ep.pageLink = Parsing.AbsUri(Consts.AD_BASE, dom.GetAttribute("href"));
                     eps.Add(ep);
                 }
-                catch { }
+                catch
+                {
+                }
                 no++;
             }
 
@@ -113,11 +123,13 @@ namespace animestr.Sources
 
                     entry.url = Parsing.AbsUri(Consts.AD_BASE, Parsing.GetBetween(dom.InnerHTML, "href=\"", "\""));
                     entry.pictureUrl = Parsing.AbsUri(Consts.AD_BASE, Parsing.GetBetween(dom.InnerHTML, "data-original=\"", "\""));
-                    entry.title = Parsing.Format(Parsing.GetBetween(Parsing.GetBetween(dom.InnerHTML, "<h3>", "</h3>"),">","<").Trim());
+                    entry.title = Parsing.Format(Parsing.GetBetween(Parsing.GetBetween(dom.InnerHTML, "<h3>", "</h3>"), ">", "<").Trim());
 
                     ret.Add(entry);
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             return ret;
@@ -145,7 +157,9 @@ namespace animestr.Sources
 
                     ret.Add(entry);
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             return ret;
