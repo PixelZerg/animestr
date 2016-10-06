@@ -2,15 +2,19 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="animestr/Views/AnimeDataView.cs">
     <Files>
-      <File FileName="animestr/Views/ConfigView.cs" Line="12" Column="9" />
-      <File FileName="animestr/Display.cs" Line="43" Column="14" />
-      <File FileName="animestr/ConsoleList.cs" Line="15" Column="48" />
-      <File FileName="animestr/Views/AnimeDataView.cs" Line="39" Column="42" />
+      <File FileName="animestr/Views/ConfigView.cs" Line="23" Column="31" />
+      <File FileName="animestr/ConsoleList.cs" Line="1" Column="1" />
+      <File FileName="animestr/Display.cs" Line="103" Column="28" />
+      <File FileName="animestr/Views/AnimeDataView.cs" Line="86" Column="21" />
       <File FileName="animestr/Sources/AnimeDao.cs" Line="45" Column="117" />
+      <File FileName="animestr/AnimeInfo.cs" Line="43" Column="38" />
+      <File FileName="animestr/Utils.cs" Line="255" Column="15" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/home/pixelzerg/git/animestr/C#/animestr/Views/AnimeDataView.cs" line="60" column="103" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
