@@ -58,7 +58,7 @@ namespace animestr
             {
                 if (i == curSel)
                 {
-                    Console.BackgroundColor = ConsoleColor.Cyan;
+                    Console.BackgroundColor = ConsoleColor.Blue;
                 }
                 if (i % 2 == 0)
                 {
@@ -68,6 +68,7 @@ namespace animestr
                 {
                     string s = (i < 9 ? " " : "") + (i < 99 ? " " : "") + (i < 999 ? " " : "") + (i + 1) + " |  " + (items[i].Length >= Console.WindowWidth - 9 - i.ToString().Length ? items[i].Substring(0, Console.WindowWidth - 11 - i.ToString().Length) + "..." : items[i]);
                     Console.Write(s);
+                    Console.ResetColor();
                     if (i == curSel)//minor optimisation
                     {
                         for (int j = 0; j < Console.WindowWidth - s.Length; j++)
@@ -75,7 +76,6 @@ namespace animestr
                             Console.Write(' ');//padding   
                         }
                     }
-                    Console.ResetColor();
                     if (i != curSel || curSel == this.items.Count - 1)//for some reason...?
                     {
                         Console.WriteLine();
@@ -83,6 +83,7 @@ namespace animestr
                 }
                 else
                 {
+                    Console.ResetColor();
                     Console.WriteLine();//padding
                 }
                 Console.ResetColor();

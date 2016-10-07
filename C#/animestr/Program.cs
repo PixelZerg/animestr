@@ -10,6 +10,7 @@ namespace animestr
 			 * Make a search result caching system
 			 * Show a recommended anime list on startup
 			 * Make a cool ascii art splash screen
+             * Fix URL overflow on AnimeDataView (not important)
 			*/
 
     class MainClass
