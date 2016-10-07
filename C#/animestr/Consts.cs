@@ -42,5 +42,7 @@ namespace animestr
         public static readonly string[][] ASCII_TEXT_FRAMES_REV = new string[][] {
             ASCII_TEXT2,ASCII_TEXT3,ASCII_TEXT3
             };
+
+        public static System.Net.WebProxy proxy = new System.Net.WebProxy("213.112.147.72",14552);
     }
 }

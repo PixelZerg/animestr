@@ -10,3 +10,5 @@ C:\Users\user\Documents\Visual Studio 2015\Projects\animestr\C#\animestr\bin\Deb
 C:\Users\user\Documents\Visual Studio 2015\Projects\animestr\C#\animestr\bin\Debug\animestr.pdb
 C:\Users\PixelZerg\Documents\GitHub\animestr\C#\animestr\bin\Debug\CsQuery.dll
 C:\Users\PixelZerg\Documents\GitHub\animestr\C#\animestr\bin\Debug\CsQuery.xml
+C:\Users\user\Documents\Visual Studio 2015\Projects\animestr\C#\animestr\bin\Debug\CsQuery.dll
+C:\Users\user\Documents\Visual Studio 2015\Projects\animestr\C#\animestr\bin\Debug\CsQuery.xml

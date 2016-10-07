@@ -112,9 +112,10 @@ namespace animestr.Sources
             string page = "";
             using (WebClient wc = new WebClient())
             {
+                wc.Proxy = Consts.proxy;
                 page = wc.DownloadString(Consts.AD_POPULAR);
             }
-
+            //Console.WriteLine(page);
             foreach (var dom in new CQ(page).Select(".well .row"))
             {
                 try

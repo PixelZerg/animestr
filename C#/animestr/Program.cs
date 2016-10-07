@@ -17,9 +17,6 @@ namespace animestr
 		public static void Main (string[] args)
 		{
             Config.Load();
-            //Console.WriteLine(new EpisodeData(3).LoadFromMAL(@"https://myanimelist.net/anime/11111/Another").synopsis);
-            //Console.WriteLine(string.Join(Environment.NewLine+Environment.NewLine,new Sources.AnimeDao().GetRecommendations()));
-            //Console.WriteLine(string.Join(Environment.NewLine + Environment.NewLine, new Sources.AnimeDao().GetSearchResults("moo")));
             new Display().Show();
             //TODO!: split the Dislay class into multiple ...View classes. E.g MainView will have the searching, etc. AnimeView show AnimeData, EpisodeView will show episodes, etc... 
             //TODO!: Update selection to s{no} and arrow keys
