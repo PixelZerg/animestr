@@ -11,7 +11,9 @@ namespace animestr
     {
         public string title = "unkown";
         public Uri pageLink = null;
-        public Dictionary<string, string> mrls = new Dictionary<string, string>(); //e.g: "Source 1 - 360p", "www.video.mp4"
+        public Dictionary<string, string> mrls = new Dictionary<string, string>();
+        //e.g: "Source 1 - 360p", "www.video.mp4"
+        [Obsolete("Obsolete because using episode index to gather synopsis is not very reliable due to differing numbering systems", true)]
         public string synopsis = null;
         public int episodeNo = -1;
 
@@ -26,6 +28,7 @@ namespace animestr
             this.episodeNo = episodeNo;
         }
 
+        [Obsolete("Obsolete because using episode index to gather synopsis is not very reliable due to differing numbering systems", true)]
         public EpisodeData LoadFromMAL(string MALurl)
         {
             //leave out check for episodeNo == -1. It will be caught.
@@ -46,10 +49,28 @@ namespace animestr
                 }
 
                 string titleSection = Parsing.GetSection(page, "<h2 ", "</h2>", "fs", "#");
-                int lIndex = titleSection.LastIndexOf('>')+1;
+                int lIndex = titleSection.LastIndexOf('>') + 1;
                 this.title = titleSection.Substring(lIndex, titleSection.Length - lIndex);
             }
             return this;
+        }
+
+        public override string ToString()
+        {
+            string ret = "Episode Data =>" + Environment.NewLine
+                         + "\tTitle: " + this.title + Environment.NewLine
+                         + "\tPage Link: " + this.pageLink + Environment.NewLine
+                         + "\tEpisode No: " + this.episodeNo + Environment.NewLine
+                         + "\tMRLS =>" + Environment.NewLine;
+
+            foreach (var mrl in this.mrls)
+            {
+                ret += "\t\t" + mrl.ToString() + Environment.NewLine;
+            }
+
+            //   ret += "\tSynopsis: \"" + this.synopsis + "\"" + Environment.NewLine;
+
+            return ret;
         }
     }
 }

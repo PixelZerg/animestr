@@ -1,20 +1,20 @@
 ﻿<Properties StartupItem="animestr/animestr.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="animestr/Views/AnimeDataView.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="animestr/Views/EpisodesView.cs">
     <Files>
-      <File FileName="animestr/Views/ConfigView.cs" Line="23" Column="31" />
-      <File FileName="animestr/ConsoleList.cs" Line="1" Column="1" />
-      <File FileName="animestr/Display.cs" Line="103" Column="28" />
-      <File FileName="animestr/Views/AnimeDataView.cs" Line="86" Column="21" />
-      <File FileName="animestr/Sources/AnimeDao.cs" Line="45" Column="117" />
-      <File FileName="animestr/AnimeInfo.cs" Line="43" Column="38" />
-      <File FileName="animestr/Utils.cs" Line="255" Column="15" />
+      <File FileName="animestr/AnimeEntry.cs" Line="1" Column="1" />
+      <File FileName="animestr/Sources/AnimeDao.cs" Line="98" Column="1" />
+      <File FileName="animestr/Parsing.cs" Line="24" Column="1" />
+      <File FileName="animestr/Utils.cs" Line="32" Column="1" />
+      <File FileName="animestr/EpisodeData.cs" Line="68" Column="49" />
+      <File FileName="animestr/Views/EpisodeDataView.cs" Line="1" Column="1" />
+      <File FileName="animestr/Views/AnimeDataView.cs" Line="117" Column="33" />
+      <File FileName="animestr/Views/EpisodesView.cs" Line="13" Column="30" />
+      <File FileName="animestr/Display.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/home/pixelzerg/git/animestr/C#/animestr/Views/AnimeDataView.cs" line="60" column="103" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

@@ -54,6 +54,8 @@
     <Compile Include="ConsoleList.cs" />
     <Compile Include="Views\AnimeDataView.cs" />
     <Compile Include="Views\ConfigView.cs" />
+    <Compile Include="Views\EpisodeDataView.cs" />
+    <Compile Include="Views\EpisodesView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
