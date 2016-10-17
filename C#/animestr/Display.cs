@@ -197,6 +197,27 @@ namespace animestr
                 ShowHelp();
                 ReadCommand();
             }
+            else if (k.KeyChar == '/')
+            {
+                Utils.ClearConsole();
+
+                clist.PrintList();
+
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("Search:");
+                Console.ResetColor();
+                Console.Write(" ");
+                try
+                {
+                    this.ShowSearch(Console.ReadLine());
+                }
+                catch
+                {
+                    InvalidCommand();
+                }
+                return;
+            }
             else if (k.Key == ConsoleKey.S)
             {
                 new Views.ConfigView().Show();
@@ -270,6 +291,28 @@ namespace animestr
                 clist.items.Add(recommendation.title);
             }
             curEntryList = recommendations;
+            this.Refresh();
+
+            ReadCommand();
+        }
+
+        private void ShowSearch(string query)
+        {
+            List<AnimeEntry> search = new List<AnimeEntry>();
+
+            new System.Threading.Thread(() =>
+                {
+                    DisplaySplash("Searching for \"" + query + "\" ...");
+                }).Start();
+            search = source.GetSearchResults(query);
+            splashDone = true;
+
+            clist = new ConsoleList("Search results for \"" + query + "\"", "Enter /{query} to search, [s]ettings to edit the config or [h]elp for more info");
+            foreach (AnimeEntry entry in search)
+            {
+                clist.items.Add(entry.title);
+            }
+            curEntryList = search;
             this.Refresh();
 
             ReadCommand();

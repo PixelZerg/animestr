@@ -102,7 +102,10 @@ namespace animestr
             else if (k.Key == ConsoleKey.Enter && itemsDisplayed[4])
             {
                 ShowEpisodes();
-                ReadCommand();
+                //ReadCommand();
+                Utils.ClearConsole();
+                this.ShowData();
+                this.ReadCommand();
             }
             else if (k.Key == ConsoleKey.B || k.Key == ConsoleKey.Backspace)
             {
@@ -117,8 +120,9 @@ namespace animestr
         public void ShowEpisodes()
         {
 //            InvalidCommand("Comming soon!");
-            this.data.episodes[this.data.episodes.Count - 1].mrls = this.source.GetMRLs(this.data.episodes[this.data.episodes.Count - 1].pageLink.AbsoluteUri);
-            Console.WriteLine(string.Join(Environment.NewLine, this.data.episodes));
+            // this.data.episodes[this.data.episodes.Count - 1].mrls = this.source.GetMRLs(this.data.episodes[this.data.episodes.Count - 1].pageLink.AbsoluteUri);
+            //Console.WriteLine(string.Join(Environment.NewLine, this.data.episodes));
+            new EpisodesView(this.display, this.data).Show();
         }
 
         public void ShowMessage(string title, string message)

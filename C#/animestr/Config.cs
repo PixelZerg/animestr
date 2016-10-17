@@ -10,6 +10,8 @@ namespace animestr
     public class Config
     {
         public static bool displayUnicodeTitles = false;
+        public static string playProgram = "vlc";
+        public static string playArgs = "%url%";
 
         private static FileInfo file = new FileInfo(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "/.animestr");
 
@@ -17,6 +19,8 @@ namespace animestr
         {
             string ret = "";
             ret += (displayUnicodeTitles ? 1 : 0) + "!";
+            ret += Convert.ToBase64String(Encoding.UTF8.GetBytes(playProgram)) + "!";
+            ret += Convert.ToBase64String(Encoding.UTF8.GetBytes(playArgs)) + "!";
             return ret;
         }
 
@@ -24,18 +28,24 @@ namespace animestr
         {
             string[] data = s.Split('!');
             displayUnicodeTitles = data[0].StartsWith("1");
+            playProgram = Encoding.UTF8.GetString(Convert.FromBase64String(data[1]));
+            playArgs = Encoding.UTF8.GetString(Convert.FromBase64String(data[2]));
         }
 
         public static void Load()
         {
-            if (file.Exists)
+            try
             {
-                LoadDataString(File.ReadAllText(file.FullName));
+                if (file.Exists)
+                {
+                    LoadDataString(File.ReadAllText(file.FullName));
+                    return;
+                }
             }
-            else
+            catch
             {
-                Save(); //save with default values
             }
+            Save(); //save with default values
         }
 
         public static void Save()
