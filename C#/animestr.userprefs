@@ -3,13 +3,13 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="animestr/Views/EpisodesView.cs">
     <Files>
       <File FileName="animestr/AnimeEntry.cs" Line="1" Column="1" />
-      <File FileName="animestr/Sources/AnimeDao.cs" Line="98" Column="1" />
-      <File FileName="animestr/Parsing.cs" Line="24" Column="1" />
-      <File FileName="animestr/Utils.cs" Line="32" Column="1" />
-      <File FileName="animestr/EpisodeData.cs" Line="68" Column="49" />
+      <File FileName="animestr/Sources/AnimeDao.cs" Line="1" Column="1" />
+      <File FileName="animestr/Parsing.cs" Line="1" Column="1" />
+      <File FileName="animestr/Utils.cs" Line="1" Column="1" />
+      <File FileName="animestr/EpisodeData.cs" Line="1" Column="1" />
       <File FileName="animestr/Views/EpisodeDataView.cs" Line="1" Column="1" />
-      <File FileName="animestr/Views/AnimeDataView.cs" Line="117" Column="33" />
-      <File FileName="animestr/Views/EpisodesView.cs" Line="13" Column="30" />
+      <File FileName="animestr/Views/AnimeDataView.cs" Line="1" Column="1" />
+      <File FileName="animestr/Views/EpisodesView.cs" Line="14" Column="13" />
       <File FileName="animestr/Display.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
