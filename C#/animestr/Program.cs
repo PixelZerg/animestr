@@ -19,6 +19,7 @@ namespace animestr
 		{
             Config.Load();
             new Display().Show();
+            
             //TODO!: split the Dislay class into multiple ...View classes. E.g MainView will have the searching, etc. AnimeView show AnimeData, EpisodeView will show episodes, etc... 
             //TODO!: Update selection to s{no} and arrow keys
             //TODO!: do settingsView
