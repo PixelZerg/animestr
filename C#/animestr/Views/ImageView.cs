@@ -35,6 +35,8 @@ namespace animestr
 
         public void PrintPicture(int boundWidth, int boundHeight)
         {
+            //  Console.Write("\x1b[1m");
+        
             Bitmap scaled = new Bitmap(bmp, (bmp.Width / (bmp.Height / boundHeight)) * 2, boundHeight);
             int padding = (boundWidth - scaled.Width) / 2;
 
@@ -56,7 +58,7 @@ namespace animestr
                     {
                         Console.Write(" ");
                     }
-                    for (int x = 0; x < bmpWidth && x < boundWidth; x++)
+                    for (int x = xoff; x < bmpWidth && x < boundWidth; x++)
                     {
                         int b = currentPixel[x * 3 + 0];
                         int g = currentPixel[x * 3 + 1];
@@ -69,7 +71,8 @@ namespace animestr
                     Console.Write(Environment.NewLine);
                 }
             }
-            ResetColour();
+            //ResetColour();
+            Console.Write("\x1b[0m");
             scaled.UnlockBits(bmpData);
         }
 
@@ -99,17 +102,6 @@ namespace animestr
             //return '.';
             return ' ';
         }
-
-        public void ResetColour()
-        {
-            switch (ColourMode)
-            {
-                case ColourMode.ANSI256:
-                    Console.Write("\x1b[0m");
-                    break;
-            }
-        }
-
 
     }
 }
