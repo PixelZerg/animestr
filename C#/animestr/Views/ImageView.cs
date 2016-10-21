@@ -15,7 +15,7 @@ namespace animestr
     public class ImageView
     {
         public Bitmap bmp = null;
-        public ColourMode ColourMode = ColourMode.ANSI256;
+        public ColourMode ColourMode = ColourMode.TrueColour;
 
         public ImageView()
         {
@@ -65,7 +65,8 @@ namespace animestr
                         int r = currentPixel[x * 3 + 2];
                         //int alpha = currentPixel[x * 4 + 3];
                         SetColour(r, g, b);
-                        Console.Write(GetSymbol(r, g, b));
+                        //Console.Write(GetSymbol(r, g, b));
+                        Console.Write(' ');
                     }
                     currentPixel += bmpStride;
                     Console.Write(Environment.NewLine);
@@ -81,7 +82,10 @@ namespace animestr
             switch (ColourMode)
             {
                 case ColourMode.ANSI256:
-                    Console.Write("\x1b[38;5;" + BashColour.ClosestBash(Color.FromArgb(r, g, b)) + "m");
+                    Console.Write("\x1b[48;5;" + BashColour.ClosestBash(Color.FromArgb(r, g, b)) + "m");
+                    break;
+                case ColourMode.TrueColour:
+                    Console.Write("\x1b[48;2;" + r + ";" + g + ";" + b + "m");
                     break;
             }
         }
