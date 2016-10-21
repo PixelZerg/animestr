@@ -252,6 +252,7 @@ namespace animestr
 
         private void InvalidCommand(string msg = "Invalid command! Do [h]elp or [s]ettings.")
         {
+            this.splashDone = true;
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(msg + " Try again.");
             Console.ResetColor();

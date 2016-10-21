@@ -91,7 +91,8 @@ namespace animestr
             }
             else if (k.Key == ConsoleKey.P && itemsDisplayed[0])
             {
-                InvalidCommand("Comming soon!");
+                new ImageView(this.data.entry.GetBitmap()).Show();
+                //InvalidCommand("Comming soon!");
             }
             else if (k.Key == ConsoleKey.R)
             {

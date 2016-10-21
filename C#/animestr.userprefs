@@ -1,16 +1,15 @@
 ﻿<Properties StartupItem="animestr/animestr.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="animestr/Views/EpisodesView.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="animestr/Views/ImageView.cs">
     <Files>
-      <File FileName="animestr/AnimeEntry.cs" Line="1" Column="1" />
-      <File FileName="animestr/Sources/AnimeDao.cs" Line="1" Column="1" />
-      <File FileName="animestr/Parsing.cs" Line="1" Column="1" />
-      <File FileName="animestr/Utils.cs" Line="1" Column="1" />
-      <File FileName="animestr/EpisodeData.cs" Line="1" Column="1" />
-      <File FileName="animestr/Views/EpisodeDataView.cs" Line="1" Column="1" />
-      <File FileName="animestr/Views/AnimeDataView.cs" Line="1" Column="1" />
-      <File FileName="animestr/Views/EpisodesView.cs" Line="14" Column="13" />
+      <File FileName="animestr/Views/EpisodesView.cs" Line="1" Column="1" />
       <File FileName="animestr/Display.cs" Line="1" Column="1" />
+      <File FileName="animestr/Views/ConfigView.cs" Line="12" Column="9" />
+      <File FileName="animestr/Views/AnimeDataView.cs" Line="1" Column="1" />
+      <File FileName="animestr/Views/EpisodeDataView.cs" Line="1" Column="1" />
+      <File FileName="animestr/Config.cs" Line="1" Column="1" />
+      <File FileName="animestr/Program.cs" Line="1" Column="1" />
+      <File FileName="animestr/Views/ImageView.cs" Line="51" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

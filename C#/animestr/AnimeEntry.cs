@@ -5,47 +5,48 @@ using System.IO;
 
 namespace animestr
 {
-	public class AnimeEntry
-	{
-		public string title = "unkown";
-		public Uri pictureUrl = null;
+    public class AnimeEntry
+    {
+        public string title = "unkown";
+        public Uri pictureUrl = null;
         public Uri url = null;
 
-		private Bitmap bmp = null;
+        private Bitmap bmp = null;
 
-		public AnimeEntry()
-		{
-		}
+        public AnimeEntry()
+        {
+        }
 
-		public AnimeEntry(string name, Uri url, Uri picUrl)
-		{
+        public AnimeEntry(string name, Uri url, Uri picUrl)
+        {
             this.url = url;
-			this.title = name;
-			this.pictureUrl = picUrl;
-		}
+            this.title = name;
+            this.pictureUrl = picUrl;
+        }
 
 
-		public Bitmap GetBitmap()
-		{
-			if (bmp == null) {
-				using (WebClient wc = new WebClient())
-				{
-					using (Stream s = wc.OpenRead(pictureUrl))
-					{
-						bmp = new Bitmap (s);
-					}
-				}
-			}
+        public Bitmap GetBitmap()
+        {
+            if (bmp == null)
+            {
+                using (WebClient wc = new WebClient())
+                {
+                    using (Stream s = wc.OpenRead(pictureUrl))
+                    {
+                        bmp = new Bitmap(s);
+                    }
+                }
+            }
 
-			return bmp;
-		}
+            return bmp;
+        }
 
         public override string ToString()
         {
             return "Anime Entry =>" + Environment.NewLine
-                  + "\tName: " + this.title + Environment.NewLine
-                  + "\tUrl: " + this.url + Environment.NewLine
-                  + "\tPicture: " + this.pictureUrl;
+            + "\tName: " + this.title + Environment.NewLine
+            + "\tUrl: " + this.url + Environment.NewLine
+            + "\tPicture: " + this.pictureUrl;
         }
     }
 }
