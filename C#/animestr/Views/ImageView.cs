@@ -15,7 +15,8 @@ namespace animestr
     public class ImageView
     {
         public Bitmap bmp = null;
-        public ColourMode ColourMode = ColourMode.TrueColour;
+        public ColourMode ColourMode = ColourMode.Plain;
+        public bool background = false;
 
         public ImageView()
         {
@@ -35,8 +36,8 @@ namespace animestr
 
         public void PrintPicture(int boundWidth, int boundHeight)
         {
-            //  Console.Write("\x1b[1m");
-        
+            this.ResetColour();
+
             Bitmap scaled = new Bitmap(bmp, (bmp.Width / (bmp.Height / boundHeight)) * 2, boundHeight);
             int padding = (boundWidth - scaled.Width) / 2;
 
@@ -65,32 +66,65 @@ namespace animestr
                         int r = currentPixel[x * 3 + 2];
                         //int alpha = currentPixel[x * 4 + 3];
                         SetColour(r, g, b);
-                        //Console.Write(GetSymbol(r, g, b));
-                        Console.Write(' ');
+                        if (!background)
+                        {
+                            Console.Write(GetSymbol(r, g, b));
+                        }
+                        else
+                        {
+                            Console.Write(' ');
+                        }
                     }
                     currentPixel += bmpStride;
+                    //Console.Write("\x1b[0m");
+                    //Console.ResetColor();
+                    this.ResetColour();
                     Console.Write(Environment.NewLine);
                 }
             }
-            //ResetColour();
-            Console.Write("\x1b[0m");
+            ResetColour();
             scaled.UnlockBits(bmpData);
+        }
+
+        public void ResetColour()
+        {
+            if (this.ColourMode == ColourMode.Plain || this.ColourMode == ColourMode.ANSI16)
+            {
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.Write("\x1b[0m");
+            }
         }
 
         public void SetColour(int r, int g, int b)
         {
-            switch (ColourMode)
+            switch (this.ColourMode)
             {
                 case ColourMode.ANSI256:
-                    Console.Write("\x1b[48;5;" + BashColour.ClosestBash(Color.FromArgb(r, g, b)) + "m");
+                    Console.Write("\x1b[" + (this.background ? "48" : "38") + ";5;" + BashColour.ClosestBash(Color.FromArgb(r, g, b)) + "m");
                     break;
                 case ColourMode.TrueColour:
-                    Console.Write("\x1b[48;2;" + r + ";" + g + ";" + b + "m");
+                    Console.Write("\x1b[" + (this.background ? "48" : "38") + ";2;" + r + ";" + g + ";" + b + "m");
+                    break;
+                case ColourMode.ANSI16:
+                    if (this.background)
+                    {
+                        Console.BackgroundColor = (ConsoleColor)BashColour.ClosestBash16(Color.FromArgb(b, g, r));
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = (ConsoleColor)BashColour.ClosestBash16(Color.FromArgb(b, g, r));
+                    }
+                    break;
+                case ColourMode.Plain:
                     break;
             }
         }
 
-        public static string symbols = @"@%#Xx+";
+        //public static string symbols = @"@%#Xx+";
+        public static string symbols = @"+xX#%@";
 
         public char GetSymbol(int r, int g, int b)
         {

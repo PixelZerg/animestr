@@ -34,6 +34,31 @@ namespace animestr
             return nearestcode;
         }
 
+        public static int ClosestBash16(System.Drawing.Color c)
+        {
+            if (list.Count <= 0)
+                serialize();
+
+            int code = 0;
+            int nearestcode = 0;
+            double nearestcloseness = int.MaxValue;
+            foreach (col col in ansi16)
+            {
+                double closeness = (Math.Abs(col.R - c.R)) + (Math.Abs(col.B - c.B)) + (Math.Abs(col.G - c.G));
+                if (closeness == 0d)
+                {
+                    return code;
+                }
+                if (closeness < nearestcloseness)
+                {
+                    nearestcloseness = closeness;
+                    nearestcode = code;
+                }
+                code++;
+            }
+            return nearestcode;
+        }
+
         public BashColour()
         {
             if (list.Count <= 0)
@@ -53,21 +78,23 @@ namespace animestr
         public static List<System.Drawing.Color> list = new List<System.Drawing.Color>();
         private static int[] additions = new int[] { 0, 95, 40, 40, 40, 10 };
 
+        private static System.Drawing.Color[] ansi16 = new System.Drawing.Color[]
+                { col.FromArgb(0, 0, 0),
+                    col.FromArgb(191, 0, 0), col.FromArgb(0, 191, 0), col.FromArgb(191, 191, 0),
+                    col.FromArgb(0, 0, 191), col.FromArgb(191, 0, 191), col.FromArgb(0, 191, 191),
+                    col.FromArgb(191, 191, 191), col.FromArgb(64, 64, 64), col.FromArgb(225, 64, 64),
+
+                    col.FromArgb(64, 225, 64), col.FromArgb(225, 225, 64), col.FromArgb(96, 96, 225)
+        , col.FromArgb(225, 64, 225), col.FromArgb(64, 225, 225), col.FromArgb(225, 225, 225)
+                };
+
         public static void serialize(bool force = false)
         {
             if (list.Count > 0 && !force)
             {
                 return;
             }
-            list.AddRange(new System.Drawing.Color[]
-                { col.FromArgb(0, 0, 0),
-                    col.FromArgb(191, 0, 0), col.FromArgb(0, 191, 0), col.FromArgb(191, 191, 0),
-                    col.FromArgb(0, 0, 191), col.FromArgb(191, 0, 191), col.FromArgb(0, 191, 191),
-                    col.FromArgb(191, 191, 191), col.FromArgb(64, 64, 64), col.FromArgb(225, 64, 64),
-            
-                    col.FromArgb(64, 225, 64), col.FromArgb(225, 225, 64), col.FromArgb(96, 96, 225)
-        , col.FromArgb(225, 64, 225), col.FromArgb(64, 225, 225), col.FromArgb(225, 225, 225)
-                });
+            list.AddRange(ansi16);
             int r = 0;
             for (int rindex = 0; rindex < 6; rindex++)
             {
